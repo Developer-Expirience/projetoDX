@@ -27,6 +27,7 @@ public class ArqCsvUsuario {
         try {
             arq = new FileWriter(nomeArq);
             saida = new Formatter(arq);
+
         } catch (IOException erro) {
             System.out.println("Erro ao abrir o arquivo");
             System.exit(1);
@@ -70,7 +71,7 @@ public class ArqCsvUsuario {
         // Bloco try-catch para abri o arquivo
         try {
             arq = new FileReader(nomeArq);
-            entrada = new Scanner(arq).useDelimiter(";|\\n");
+            entrada = new Scanner(arq).useDelimiter("\n");
         } catch (FileNotFoundException erro) {
             System.out.println("Arquivo não encontrado");
             System.exit(1);
@@ -78,7 +79,7 @@ public class ArqCsvUsuario {
 
         // Bloco para ler o arquivo
         try {
-            System.out.printf("%-6S %-14S %-11S %14S %14S %14S %15S       '%5S %10S %14S %8S %10S %15S\n",
+            System.out.printf("%-6S %-14S %-11S %14S %14S %14S %15S '%5S %10S %14S %8S %10S %15S\n",
                     "código", "usuario", "data",
                     "nome", "email", "cpf", "rua", "numero", "cep", "bairro", "cidade",
                     "complemento", "telefone");
@@ -100,6 +101,7 @@ public class ArqCsvUsuario {
                 System.out.printf("%06d %-14s %-11s %-14s %-14s %-14s %-15s       %5d %10s %-14s %-8s %-10s %15s\n",
                         idUsuario, usuario, data, nome, email, cpf, rua, numero, cep, bairro, cidade,
                         complemento, telefone);
+
             }
         } catch (NoSuchElementException erro) {
             System.out.println("Arquivo com problemas");

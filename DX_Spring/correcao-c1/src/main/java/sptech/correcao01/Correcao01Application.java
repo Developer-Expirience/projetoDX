@@ -12,11 +12,7 @@ import java.util.ArrayList;
 public class Correcao01Application {
 
 	public static void main(String[] args) {
-		UsuarioController usuarioController = new UsuarioController();
-		ListaObj<Usuario> lista = new ListaObj<>(usuarioController.getContador());
 		SpringApplication.run(Correcao01Application.class, args);
-		ArqCsvUsuario.gravaArquivoCsv(lista, "usuarios");
-		ArqCsvUsuario.leExibeArquivocsv("usuarios");
 	}
 
 }

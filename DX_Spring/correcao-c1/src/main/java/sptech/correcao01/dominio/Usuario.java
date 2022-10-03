@@ -35,7 +35,7 @@ public class Usuario {
 //    @PositiveOrZero
 //    private Integer filhos;
 
-    @NotBlank
+
     @Past // indica que só serão aceitas data passadas (antes de hoje)
 //    @PastOrPresent
 //    @Future
@@ -80,6 +80,8 @@ public class Usuario {
         regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
         message = "Indique um telefone válido"
     )
+
+
     private String telefone;
 
 

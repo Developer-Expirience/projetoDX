@@ -3,6 +3,7 @@ package sptech.correcao01.controle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Usuario;
 import sptech.correcao01.repositorio.UsuarioRepository;
 
@@ -23,14 +24,20 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
-        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         contador++;
+        Usuario u = novoUsuario;
+        ListaObj<Usuario> lista = new ListaObj<>(getContador());
+        lista.adiciona(u);
+        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
+        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
+
     }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
         List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
+        ArqCsvUsuario.leExibeArquivocsv("usuarios");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
