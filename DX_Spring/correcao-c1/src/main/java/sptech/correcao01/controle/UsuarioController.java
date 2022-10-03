@@ -17,10 +17,14 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+    private int contador;
+
+
     @PostMapping
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
-        repository.save(novoUsuario); // faz um insert ou update, dependendo de a chave primária existe ou não no banco
+        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
+        contador++;
         return ResponseEntity.status(201).body(novoUsuario);
     }
 
@@ -66,6 +70,10 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return ResponseEntity.status(404).build();
     }
+    public int getContador() {
+        return contador;
+    }
+
 }
 
 

@@ -82,6 +82,7 @@ public class Usuario {
     )
     private String telefone;
 
+
     public Integer getIdUsuario() {
         return idUsuario;
     }
