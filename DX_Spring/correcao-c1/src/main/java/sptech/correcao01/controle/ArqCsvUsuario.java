@@ -25,7 +25,7 @@ public class ArqCsvUsuario {
         // Bloco try-catch para abri o arquivo
 
         try {
-            arq = new FileWriter(nomeArq);
+            arq = new FileWriter(nomeArq, true);
             saida = new Formatter(arq);
 
         } catch (IOException erro) {
@@ -44,11 +44,13 @@ public class ArqCsvUsuario {
                         usuario.getCep(), usuario.getBairro(), usuario.getCidade(),
                         usuario.getComplemento(), usuario.getTelefone());
             }
+
         } catch (FormatterClosedException erro) {
             System.out.println("Erro ao gravar o arquivo");
             erro.printStackTrace();
             deuRuim = true;
-        } finally {
+        }
+        finally {
             saida.close();
             try {
                 arq.close();
@@ -71,7 +73,7 @@ public class ArqCsvUsuario {
         // Bloco try-catch para abri o arquivo
         try {
             arq = new FileReader(nomeArq);
-            entrada = new Scanner(arq).useDelimiter("\n");
+            entrada = new Scanner(arq).useDelimiter(";|\\n");
         } catch (FileNotFoundException erro) {
             System.out.println("Arquivo não encontrado");
             System.exit(1);
@@ -101,7 +103,6 @@ public class ArqCsvUsuario {
                 System.out.printf("%06d %-14s %-11s %-14s %-14s %-14s %-15s       %5d %10s %-14s %-8s %-10s %15s\n",
                         idUsuario, usuario, data, nome, email, cpf, rua, numero, cep, bairro, cidade,
                         complemento, telefone);
-
             }
         } catch (NoSuchElementException erro) {
             System.out.println("Arquivo com problemas");
