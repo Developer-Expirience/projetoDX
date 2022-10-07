@@ -65,7 +65,7 @@ public class ArqCsvEmpresa {
         }
     }
 
-    public static void leExibeArquivocsv(String nomeArq) {
+    public static void leExibeArquivoCsv(String nomeArq) {
         FileReader arq = null; // objeto que represnet ao arquivo para leitura
         Scanner entrada = null; // objeto usado para ler do arquivo
         Boolean deuRuim = false;

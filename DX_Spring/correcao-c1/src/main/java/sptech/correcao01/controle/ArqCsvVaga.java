@@ -1,7 +1,8 @@
 package sptech.correcao01.controle;
 
 import sptech.correcao01.ListaObj;
-import sptech.correcao01.dominio.Usuario;
+import sptech.correcao01.dominio.Empresa;
+import sptech.correcao01.dominio.Vaga;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,10 +13,10 @@ import java.util.FormatterClosedException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ArqCsvUsuario {
+public class ArqCsvVaga {
 
 
-    public static void gravaArquivoCsv(ListaObj<Usuario> lista, String nomeArq) {
+    public static void gravaArquivoCsv(ListaObj<Vaga> lista, String nomeArq) {
 
         FileWriter arq = null; // objeto que represent ao arquivo de escrita
         Formatter saida = null; // objeto usado para escrever no arquivo
@@ -36,13 +37,10 @@ public class ArqCsvUsuario {
         // Bloco try-catch para gravar o arquivo
         try {
             for (int i = 0; i < lista.getTamanho(); i++) {
-                Usuario usuario = lista.getElemento(i);
-                saida.format("%d;%s;%s;%s;%s;%s;%s;%d;%s;%s;%s;%s;%s\n",
-                        usuario.getIdUsuario(), usuario.getUsuario(),
-                        usuario.getDataNascimento(), usuario.getNome(), usuario.getEmail(),
-                        usuario.getCpf(), usuario.getRua(), usuario.getNumero(),
-                        usuario.getCep(), usuario.getBairro(), usuario.getCidade(),
-                        usuario.getComplemento(), usuario.getTelefone());
+                Vaga vaga = lista.getElemento(i);
+                saida.format("%d;%s;%d;%.2f\n",
+                        vaga.getIdVaga(), vaga.getDescricao(),
+                        vaga.getTempEstimado(), vaga.getValor());
             }
 
         } catch (FormatterClosedException erro) {
@@ -79,30 +77,18 @@ public class ArqCsvUsuario {
             System.exit(1);
         }
 
-        // Bloco para ler o arquivo
+        // Bloco para ler o
         try {
-            System.out.printf("%-6S %-14S %-11S %14S %14S %14S %15S '%5S %10S %14S %8S %10S %15S\n",
-                    "código", "usuario", "data",
-                    "nome", "email", "cpf", "rua", "numero", "cep", "bairro", "cidade",
-                    "complemento", "telefone");
+            System.out.printf("%6S %-14S %11S %6S\n",
+                    "idVaga", "descricao", "tempEstimado", "valor");
 
             while (entrada.hasNext()) {
-                int idUsuario = entrada.nextInt();
-                String usuario = entrada.next();
-                String data = entrada.next();
-                String nome = entrada.next();
-                String email = entrada.next();
-                String cpf = entrada.next();
-                String rua = entrada.next();
-                int numero = entrada.nextInt();
-                String cep = entrada.next();
-                String bairro = entrada.next();
-                String cidade = entrada.next();
-                String complemento = entrada.next();
-                String telefone = entrada.next();
-                System.out.printf("%06d %-14s %-11s %-14s %-14s %-14s %-15s       %5d %10s %-14s %-8s %-10s %15s\n",
-                        idUsuario, usuario, data, nome, email, cpf, rua, numero, cep, bairro, cidade,
-                        complemento, telefone);
+                int idVaga = entrada.nextInt();
+                String descricao = entrada.next();
+                int tempEstimado = entrada.nextInt();
+                Double valor = entrada.nextDouble();
+                System.out.printf("%06d %-14s %11d %6.2f\n",
+                        idVaga, descricao, tempEstimado, valor);
             }
         } catch (NoSuchElementException erro) {
             System.out.println("Arquivo com problemas");
