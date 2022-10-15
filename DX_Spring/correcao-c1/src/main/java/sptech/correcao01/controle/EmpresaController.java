@@ -26,7 +26,7 @@ public class EmpresaController {
         Empresa e = novaEmpresa;
         ListaObj<Empresa> lista = new ListaObj<>(getContador());
         lista.adiciona(e);
-        ArqCsvEmpresa.gravaArquivoCsv(lista,"empresas");
+        ArqCsvEmpresa.gravaArquivoCsv(lista,"empresas.csv");
         repository.save(novaEmpresa); // faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novaEmpresa);
     }
@@ -34,7 +34,7 @@ public class EmpresaController {
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela
-        ArqCsvEmpresa.leExibeArquivocsv("empresas");
+        ArqCsvEmpresa.leExibeArquivocsv("empresas.csv");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);

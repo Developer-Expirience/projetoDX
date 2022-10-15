@@ -28,7 +28,7 @@ public class UsuarioController {
         Usuario u = novoUsuario;
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
         lista.adiciona(u);
-        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
+        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios.csv");
         repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
 
@@ -37,7 +37,7 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
         List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
-        ArqCsvUsuario.leExibeArquivocsv("usuarios");
+        ArqCsvUsuario.leExibeArquivoCsv("usuarios.csv");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
