@@ -5,55 +5,55 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Usuario;
-import sptech.correcao01.repositorio.UsuarioRepository;
+import sptech.correcao01.dominio.Vaga;
+import sptech.correcao01.repositorio.VagaRepository;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/usuarios")
-public class UsuarioController {
+@RequestMapping("/vagas")
+public class VagaController {
 
     /*
-
-    */
+        {
+          "idVaga": 0,
+          "descricao": "",
+          "valor": 0.00,
+          "tempEstimado": 0
+        }
+     */
 
     @Autowired
-    private UsuarioRepository repository;
+    private VagaRepository repository;
+
     private int contador;
 
 
     @PostMapping
-    public ResponseEntity<Usuario> post(
-            @RequestBody Usuario novoUsuario) {
+    public ResponseEntity<Vaga> post(
+            @RequestBody Vaga novoVaga) {
         contador++;
-        Usuario u = novoUsuario;
-        u.setIdUsuario(contador);
-        ListaObj<Usuario> lista = new ListaObj<>(getContador());
-        lista.adiciona(u);
-        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios.csv");
-        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
-        return ResponseEntity.status(201).body(novoUsuario);
+        Vaga v = novoVaga;
+        v.setIdVaga(contador);
+        ListaObj<Vaga> lista = new ListaObj<>(getContador());
+        lista.adiciona(v);
+        ArqCsvVaga.gravaArquivoCsv(lista,"vagas");
+        repository.save(novoVaga);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
+        return ResponseEntity.status(201).body(novoVaga);
 
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> get() {
-        List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
-<<<<<<< HEAD
-        ArqCsvUsuario.leExibeArquivoCsv("usuarios.csv");
-=======
-        ArqCsvUsuario.leExibeArquivoCsv("usuarios");
->>>>>>> 55cb87c5e64d811706343dfe7ed4fecf5881e05b
+    public ResponseEntity<List<Vaga>> get() {
+        List<Vaga> lista = repository.findAll(); // faz um "select * from" da tabela
+        ArqCsvVaga.leExibeArquivoCsv("vagas");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> get(
+    public ResponseEntity<Vaga> get(
             @PathVariable int id) {
 /*
 Se o findById() encontrar valor, ele será usado no corpo da resposta e o status da resposta será 200
@@ -77,12 +77,12 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> put(
-            @PathVariable int id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Vaga> put(
+            @PathVariable int id, @RequestBody Vaga vaga) {
         if (repository.existsById(id)) {
-            usuario.setIdUsuario(id);
-            repository.save(usuario); // faz um "update" pois o id existe
-            return ResponseEntity.status(200).body(usuario);
+            vaga.setIdVaga(id);
+            repository.save(vaga); // faz um "update" pois o id existe
+            return ResponseEntity.status(200).body(vaga);
         }
         return ResponseEntity.status(404).build();
     }
@@ -91,5 +91,3 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
     }
 
 }
-
-

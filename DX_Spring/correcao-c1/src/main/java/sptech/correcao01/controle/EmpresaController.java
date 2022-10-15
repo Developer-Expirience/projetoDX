@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/empresas")
 public class EmpresaController {
 
+
     @Autowired
     private EmpresaRepository repository;
     private int contador;
@@ -24,6 +25,7 @@ public class EmpresaController {
             @RequestBody Empresa novaEmpresa) {
         contador++;
         Empresa e = novaEmpresa;
+        e.setIdEmpresa(contador);
         ListaObj<Empresa> lista = new ListaObj<>(getContador());
         lista.adiciona(e);
         ArqCsvEmpresa.gravaArquivoCsv(lista,"empresas.csv");
@@ -34,7 +36,11 @@ public class EmpresaController {
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela
+<<<<<<< HEAD
         ArqCsvEmpresa.leExibeArquivocsv("empresas.csv");
+=======
+        ArqCsvEmpresa.leExibeArquivoCsv("empresas");
+>>>>>>> 55cb87c5e64d811706343dfe7ed4fecf5881e05b
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
