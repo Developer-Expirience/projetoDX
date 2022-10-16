@@ -42,11 +42,7 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
         List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
-<<<<<<< HEAD
-        ArqCsvUsuario.leExibeArquivoCsv("usuarios.csv");
-=======
         ArqCsvUsuario.leExibeArquivoCsv("usuarios");
->>>>>>> 55cb87c5e64d811706343dfe7ed4fecf5881e05b
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
