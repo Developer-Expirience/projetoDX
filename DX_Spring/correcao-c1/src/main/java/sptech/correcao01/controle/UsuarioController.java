@@ -3,6 +3,7 @@ package sptech.correcao01.controle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Usuario;
 import sptech.correcao01.repositorio.UsuarioRepository;
 
@@ -15,18 +16,33 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    /*
+
+    */
+
     @Autowired
     private UsuarioRepository repository;
+    private int contador;
+
+
     @PostMapping
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
-        repository.save(novoUsuario); // faz um insert ou update, dependendo de a chave primária existe ou não no banco
+        contador++;
+        Usuario u = novoUsuario;
+        u.setIdUsuario(contador);
+        ListaObj<Usuario> lista = new ListaObj<>(getContador());
+        lista.adiciona(u);
+        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios.csv");
+        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
+
     }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
         List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
+        ArqCsvUsuario.leExibeArquivoCsv("usuarios");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
@@ -66,6 +82,10 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return ResponseEntity.status(404).build();
     }
+    public int getContador() {
+        return contador;
+    }
+
 }
 
 

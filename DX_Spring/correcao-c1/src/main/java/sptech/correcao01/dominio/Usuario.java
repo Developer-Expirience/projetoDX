@@ -4,15 +4,14 @@ package sptech.correcao01.dominio;
 import org.hibernate.validator.constraints.br.CPF;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public class Usuario {
+@Table(name="Usuario")
+public class Usuario implements Serializable {
 
     @Id  // do javax.persistence
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,17 +24,6 @@ public class Usuario {
     @NotBlank // valida se não é nulo, texto vazio ou texto só com espaços em branco
     private String senha;
 
-    // @NotBlank // ERRO COMUM! NotBlank é só para String. Obrigatório p/ os demais tipos é @NotNull
-//    @NotNull // do pacote javax.validation - valida se o campo está presente e não é null
-//    @Min(0) // valida se o valor é pelo menos 0
-    // @DecimalMin("0.01") // para numeros reais (Double, Float, BigDecimal)
-//    @Negative
-//    @NegativeOrZero
-//    @Positive
-//    @PositiveOrZero
-//    private Integer filhos;
-
-    @NotBlank
     @Past // indica que só serão aceitas data passadas (antes de hoje)
 //    @PastOrPresent
 //    @Future
@@ -80,7 +68,10 @@ public class Usuario {
         regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
         message = "Indique um telefone válido"
     )
+
+
     private String telefone;
+
 
     public Integer getIdUsuario() {
         return idUsuario;

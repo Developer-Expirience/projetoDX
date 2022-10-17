@@ -7,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 @Entity
-public class Empresa {
+public class Empresa implements Serializable {
 
     @Id  // do javax.persistence
     @GeneratedValue(strategy = GenerationType.IDENTITY)

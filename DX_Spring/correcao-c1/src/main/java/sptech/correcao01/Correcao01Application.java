@@ -2,6 +2,11 @@ package sptech.correcao01;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import sptech.correcao01.controle.ArqCsvUsuario;
+import sptech.correcao01.controle.UsuarioController;
+import sptech.correcao01.dominio.Usuario;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class Correcao01Application {
