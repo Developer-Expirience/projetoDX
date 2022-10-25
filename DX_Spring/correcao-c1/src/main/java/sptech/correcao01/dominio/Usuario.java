@@ -63,6 +63,8 @@ public class Usuario implements Serializable {
     @Size(min = 5)
     private String complemento;
 
+    private boolean usuarioValidado;
+
     @NotBlank
     @Pattern( // valida usando uma Regex (expressão regular)
         regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
@@ -72,6 +74,20 @@ public class Usuario implements Serializable {
 
     private String telefone;
 
+    public boolean isUsuarioValidado() {
+        return usuarioValidado;
+    }
+
+    public void setUsuarioValidado(boolean usuarioValidado) {
+        this.usuarioValidado = usuarioValidado;
+    }
+
+    public boolean getUsuarioAutenticado(String usuario, String senha){
+        if (this.usuario.equals(usuario) && this.senha.equals(senha)){
+             setUsuarioValidado(true);
+        }
+        return usuarioValidado;
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;

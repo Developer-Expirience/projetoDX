@@ -14,6 +14,9 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idVaga;
 
+    private String seneriodade;
+
+    private String tipoTecnologia;
     @NotBlank
     private String descricao;
 

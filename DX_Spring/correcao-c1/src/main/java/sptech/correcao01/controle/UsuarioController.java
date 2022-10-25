@@ -1,5 +1,6 @@
 package sptech.correcao01.controle;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,6 @@ import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Usuario;
 import sptech.correcao01.repositorio.UsuarioRepository;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +33,55 @@ public class UsuarioController {
         u.setIdUsuario(contador);
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
         lista.adiciona(u);
-        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios.csv");
+        ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
         repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
 
+    }
+
+    @PostMapping("/login/{usuario}/{senha}")
+    public ResponseEntity postLogin(@PathVariable String usuario, @PathVariable String senha){
+        List<Usuario> lista = repository.findAll();
+        for (Usuario u: lista){
+            if (u.getUsuarioAutenticado(usuario, senha)){
+                u.setUsuarioValidado(true);
+                repository.save(u);
+                return ResponseEntity.status(200).body(true);
+            }
+        }
+        return ResponseEntity.status(404).body(false);
+    }
+
+    @PostMapping("/logoff/{usuario}")
+    public ResponseEntity postLogoff(@PathVariable String usuario){
+        List<Usuario> lista = repository.findAll();
+        for (Usuario u: lista){
+            if (u.isUsuarioValidado()){
+                u.setUsuarioValidado(false);
+                repository.save(u);
+                return ResponseEntity.status(200).body(u.isUsuarioValidado());
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+    @GetMapping("/usuario-logado")
+    public ResponseEntity getUsuarioLogado(@RequestParam(required = false) String usuario){
+        List<Usuario> lista = repository.findAll();
+        List<Usuario> listaLogado = new ArrayList<>();
+        if (!(usuario == null)){
+            for (Usuario u: lista){
+                if (usuario.equals(u.getUsuario())){
+                    return ResponseEntity.status(200).body(u);
+                }
+            }
+        }else {
+            for (Usuario u: lista){
+                if (u.isUsuarioValidado() == true){
+                    listaLogado.add(u);
+                }
+            }
+        }
+        return listaLogado.isEmpty()? ResponseEntity.status(404).build() :ResponseEntity.status(200).body(listaLogado);
     }
 
     @GetMapping

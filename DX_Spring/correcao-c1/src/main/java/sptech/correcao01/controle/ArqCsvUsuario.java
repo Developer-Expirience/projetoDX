@@ -20,6 +20,7 @@ public class ArqCsvUsuario {
         FileWriter arq = null; // objeto que represent ao arquivo de escrita
         Formatter saida = null; // objeto usado para escrever no arquivo
         Boolean deuRuim = false;
+        nomeArq += ".csv";
         // acrescenta a extensão csv ao nome do arquivo
 
         // Bloco try-catch para abri o arquivo
@@ -68,7 +69,7 @@ public class ArqCsvUsuario {
         FileReader arq = null; // objeto que represnet ao arquivo para leitura
         Scanner entrada = null; // objeto usado para ler do arquivo
         Boolean deuRuim = false;
-
+        nomeArq += ".csv";
 
         // Bloco try-catch para abrir o arquivo
         try {
