@@ -1,0 +1,6 @@
+insert into usuario (bairro, cep, cidade, complemento, cpf,
+    data_nascimento, email, nome, numero, rua, senha, telefone,
+        usuario, usuario_validado)
+            values ('bairro 1', '08090234', 'cidade 1', 'AP 12', '468.549.448-21',
+                '2002-10-12', 'Vinicius@gmail.com', 'Vinicius', 123, 'rua A', 'senha123',
+                    '11 90223-7823', 'vin123', false);

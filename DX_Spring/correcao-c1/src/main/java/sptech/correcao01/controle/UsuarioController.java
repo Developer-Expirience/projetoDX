@@ -64,6 +64,7 @@ public class UsuarioController {
         }
         return ResponseEntity.status(404).build();
     }
+
     @GetMapping("/usuario-logado")
     public ResponseEntity getUsuarioLogado(@RequestParam(required = false) String usuario){
         List<Usuario> lista = repository.findAll();
