@@ -19,10 +19,29 @@ public class Vaga {
 
     @NotNull
     private Double valor;
+    @NotNull
+    private String senioridade;
+
+    public String getSenioridade() {
+        return senioridade;
+    }
+
+    public void setSenioridade(String senioridade) {
+        this.senioridade = senioridade;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
+    }
+
+    public void setTecnologia(String tecnologia) {
+        this.tecnologia = tecnologia;
+    }
 
     @NotNull
+    private String tecnologia;
+    @NotNull
     private Integer tempEstimado;
-
     public Integer getIdVaga() {
         return idVaga;
     }
@@ -34,6 +53,7 @@ public class Vaga {
     public String getDescricao() {
         return descricao;
     }
+
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
