@@ -192,8 +192,8 @@ public class ArqTxtEmpresa {
                     System.out.println(empresa);
                 }
     
-            //gravaArquivoTxt(lista, "Empresas.txt");
-               leArquivoTxt("Empresas.txt");
+            gravaArquivoTxt(lista, "Empresas.txt");
+               //leArquivoTxt("Empresas.txt");
         }
 
 }

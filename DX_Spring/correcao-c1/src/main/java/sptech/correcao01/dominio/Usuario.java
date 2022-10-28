@@ -72,12 +72,11 @@ public class Usuario implements Serializable {
 
     private String telefone;
 
-    public Usuario(Integer idUsuario, String usuario, String senha, LocalDate dataNascimento, String nome, String email,
+    public Usuario(Integer idUsuario, String usuario, LocalDate dataNascimento, String nome, String email,
                    String cpf, String rua, Integer numero, String cep, String bairro, String cidade, String complemento,
                    String telefone) {
         this.idUsuario = idUsuario;
         this.usuario = usuario;
-        this.senha = senha;
         this.dataNascimento = dataNascimento;
         this.nome = nome;
         this.email = email;
@@ -201,5 +200,24 @@ public class Usuario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", usuario='" + usuario + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", rua='" + rua + '\'' +
+                ", numero=" + numero +
+                ", cep='" + cep + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
     }
 }
