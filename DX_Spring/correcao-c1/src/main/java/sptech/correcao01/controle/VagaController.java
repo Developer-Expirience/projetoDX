@@ -40,7 +40,6 @@ public class VagaController {
         ArqCsvVaga.gravaArquivoCsv(lista,"vagas");
         repository.save(novoVaga);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoVaga);
-
     }
 
     @GetMapping
@@ -52,14 +51,10 @@ public class VagaController {
                 : ResponseEntity.status(200).body(lista);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idVaga}")
     public ResponseEntity<Vaga> get(
-            @PathVariable int id) {
-/*
-Se o findById() encontrar valor, ele será usado no corpo da resposta e o status da resposta será 200
-Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
- */
-        return ResponseEntity.of(repository.findById(id));
+            @PathVariable int idVaga) {
+        return ResponseEntity.of(repository.findById(idVaga));
     }
 
     @DeleteMapping("/{id}")
