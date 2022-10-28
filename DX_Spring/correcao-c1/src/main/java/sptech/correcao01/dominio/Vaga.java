@@ -23,6 +23,13 @@ public class Vaga {
     @NotNull
     private Integer tempEstimado;
 
+    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
+        this.idVaga = idVaga;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tempEstimado = tempEstimado;
+    }
+
     public Integer getIdVaga() {
         return idVaga;
     }

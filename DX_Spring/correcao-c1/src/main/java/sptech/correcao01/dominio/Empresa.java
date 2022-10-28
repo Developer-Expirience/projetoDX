@@ -76,6 +76,23 @@ public class Empresa implements Serializable {
     @Size(min = 3)
     private String cidade;
 
+    public Empresa(Integer idEmpresa, String nome, String usuario, String email, String cnpj,
+                   String telefone, Integer numFuncionario, String rua, Integer numero, String cep, String bairro,
+                   String cidade) {
+        this.idEmpresa = idEmpresa;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.email = email;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.numFuncionario = numFuncionario;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
+
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
@@ -178,5 +195,23 @@ public class Empresa implements Serializable {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "idEmpresa=" + idEmpresa +
+                ", nome='" + nome + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", numFuncionario=" + numFuncionario +
+                ", rua='" + rua + '\'' +
+                ", numero=" + numero +
+                ", cep='" + cep + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                '}';
     }
 }
