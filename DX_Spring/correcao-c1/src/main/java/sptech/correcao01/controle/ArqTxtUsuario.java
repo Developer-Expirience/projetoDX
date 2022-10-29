@@ -37,7 +37,7 @@ public class ArqTxtUsuario {
         int contaRegDados = 0;
 
         // Monta o registro de header
-        String header = "00NOTA20222";
+        String header = "USUARIO";
         header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         header += "01";
 
@@ -140,8 +140,8 @@ public class ArqTxtUsuario {
                     cidade = registro.substring(134, 154).trim();
                     complemento = registro.substring(154, 164).trim();
                     telefone = registro.substring(164, 177).trim();
-                    LocalDate localDate = LocalDate.parse(dataNasc);
                     contaRegDadoLido++;
+                    LocalDate localDate = LocalDate.parse(dataNasc);
 
                     // Instancia um objeto usuario com as informações lidas
                     Usuario usuario = new Usuario(idUsuario, userUsuario, localDate, nome, email, cpf, rua, numero, cep,
@@ -182,11 +182,14 @@ public class ArqTxtUsuario {
 
     public static void main(String[] args) {
         List<Usuario> lista = new ArrayList();
-        LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        lista.add(new Usuario( 106714,"JV", 05082003,
+
+
+        lista.add(new Usuario( 106714,"JV", LocalDate.now().minusMonths(6),
                 "Joao", "Estrutura.de.Dados@gmail", "52603012851",
                 "Ruapprimerihotyrhcop", 7453, "12345678", "Gru", "Rio",
                 "apartamento 9", "11 97305-1817"));
+
+
         System.out.println("Lista original:");
         for (Usuario usuario : lista) {
             System.out.println(usuario);

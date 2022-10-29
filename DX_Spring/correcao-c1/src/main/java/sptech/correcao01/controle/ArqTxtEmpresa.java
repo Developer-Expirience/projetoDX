@@ -37,7 +37,7 @@ public class ArqTxtEmpresa {
                 int contaRegDados = 0;
     
                 // Monta o registro de header
-                String header = "00NOTA20222";
+                String header = "EMPRESA";
                 header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
                 header += "01";
     
