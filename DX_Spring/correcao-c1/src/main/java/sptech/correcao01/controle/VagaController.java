@@ -90,4 +90,24 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         return contador;
     }
 
+    @GetMapping("/procurar-salario")
+    public ResponseEntity <List<Vaga>> procurarSalario(@RequestParam(defaultValue = "0") Double minSalario, @RequestParam(defaultValue = "1000000000000") Double maxSalario){
+        List<Vaga> result = repository.findBySalarioBetween(minSalario,maxSalario);
+        return ResponseEntity.status(200).body(result);
+    }
+    @GetMapping("/procurar-senioridade")
+    public ResponseEntity<List<Vaga>> getPorSenioridade(@PathVariable String senioridade){
+        List<Vaga> vagasSenioridade = repository.findBySenioridade(senioridade);
+        return vagasSenioridade.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasSenioridade);
+    }
+    @GetMapping("/procurar-tecnologia")
+    public ResponseEntity<List<Vaga>> getPorTecnologia(@PathVariable String tecnologia){
+        List<Vaga> vagasTecnologia = repository.findByTecnologia(tecnologia);
+        return vagasTecnologia.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasTecnologia);
+    }
+    @GetMapping("/procurar-titulo")
+    public ResponseEntity<List<Vaga>> getPorTitulo(@PathVariable String titulo){
+        List<Vaga> vagasTitulo = repository.findByTitulo(titulo);
+        return vagasTitulo.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasTitulo);
+    }
 }

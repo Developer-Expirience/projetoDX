@@ -22,6 +22,8 @@ public class Vaga {
     @NotNull
     private String senioridade;
 
+    @NotNull
+    private String titulo;
     public String getSenioridade() {
         return senioridade;
     }
