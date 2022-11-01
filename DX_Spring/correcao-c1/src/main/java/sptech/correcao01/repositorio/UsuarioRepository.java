@@ -7,5 +7,6 @@ import sptech.correcao01.dominio.Usuario;
 
     public interface UsuarioRepository extends
             JpaRepository<Usuario, Integer> {
+
     }
 

@@ -1,6 +1,8 @@
 package sptech.correcao01.controle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sptech.correcao01.dominio.Usuario;
+import sptech.correcao01.repositorio.UsuarioRepository;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArqTxtUsuario {
+
+
     public static void gravaRegistro(String registro, String nomeArq) {
         BufferedWriter saida = null;
 
@@ -59,7 +63,7 @@ public class ArqTxtUsuario {
             corpo += String.format("%-8.8s", usuario.getCep());
             corpo += String.format("%-20.20s", usuario.getBairro());
             corpo += String.format("%-10.10s", usuario.getCidade());
-            corpo += String.format("%-10.10s", usuario.getComplemento());
+            corpo += String.format("%-20.20s", usuario.getComplemento());
             corpo += String.format("%-13.13s", usuario.getTelefone());
             gravaRegistro(corpo, nomeArq);
             contaRegDados++;
@@ -137,8 +141,8 @@ public class ArqTxtUsuario {
                     numero = Integer.valueOf(registro.substring(102,106));
                     cep = registro.substring(106, 114).trim();
                     bairro = registro.substring(114, 134).trim();
-                    cidade = registro.substring(134, 154).trim();
-                    complemento = registro.substring(154, 164).trim();
+                    cidade = registro.substring(134, 144).trim();
+                    complemento = registro.substring(144, 164).trim();
                     telefone = registro.substring(164, 177).trim();
                     contaRegDadoLido++;
                     LocalDate localDate = LocalDate.parse(dataNasc);
@@ -183,11 +187,15 @@ public class ArqTxtUsuario {
     public static void main(String[] args) {
         List<Usuario> lista = new ArrayList();
 
+        lista.add(new Usuario(123456, "erick", LocalDate.now().minusMonths(5),
+                "Erick", "erick@gmail.com", "12345678990", "Rua Sete de Setembro",
+                123, "12345678", "Bairro da Luz", "São Paulo",
+                "Apartamento 14", "11 91234-4321"));
 
-        lista.add(new Usuario( 106714,"JV", LocalDate.now().minusMonths(6),
-                "Joao", "Estrutura.de.Dados@gmail", "52603012851",
-                "Ruapprimerihotyrhcop", 7453, "12345678", "Gru", "Rio",
-                "apartamento 9", "11 97305-1817"));
+        lista.add(new Usuario(333456, "raul", LocalDate.now().minusMonths(7),
+                "Raul", "raul@gmail.com", "33345691320", "Avenida Nove de Julho",
+                300, "87654321", "Bairro da Cidade", "São Paulo",
+                "Apartamento 40", "11 93344-4895"));
 
 
         System.out.println("Lista original:");

@@ -1,0 +1,5 @@
+VAGA31-10-2022 20:09:1401
+02200010Front-End React          145,10   8
+02100010Back-End Java            245,70  10
+02200230Banco de dados Sql       210,50   7
+010000000003

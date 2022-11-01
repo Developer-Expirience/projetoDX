@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Vaga {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idVaga;
@@ -22,6 +24,9 @@ public class Vaga {
 
     @NotNull
     private Integer tempEstimado;
+
+    public Vaga() {
+    }
 
     public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
         this.idVaga = idVaga;
@@ -60,5 +65,15 @@ public class Vaga {
 
     public void setTempEstimado(Integer tempEstimado) {
         this.tempEstimado = tempEstimado;
+    }
+
+    @Override
+    public String toString() {
+        return "Vaga{" +
+                "idVaga=" + idVaga +
+                ", descricao='" + descricao + '\'' +
+                ", valor=" + valor +
+                ", tempEstimado=" + tempEstimado +
+                '}';
     }
 }
