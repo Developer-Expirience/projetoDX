@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface VagaRepository extends JpaRepository<Vaga, Integer> {
     //get by Titulo Vaga
-        List<Vaga> findByTitulo(String titulo);
+        List<Vaga> findByTituloContaining(String titulo);
     //get by senioridade
         List<Vaga> findBySenioridade(String senioridade);
     //get by tecnologia
-        List<Vaga> findByTecnologia(String tecnologia);
+        List<Vaga> findByTecnologiaContaining(String tecnologia);
 
     // range do salario
     //

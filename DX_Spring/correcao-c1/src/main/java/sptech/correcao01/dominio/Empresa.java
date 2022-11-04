@@ -12,6 +12,21 @@ import java.io.Serializable;
 @Entity
 public class Empresa implements Serializable {
 
+//    {
+//        "idEmpresa":1,
+//            "nome":"teste",
+//            "usuario":"testeEmpresa",
+//            "senha":"teste",
+//            "email":"teste@email.com",
+//            "cnpj":"80.117.186/0001-00",
+//            "telefone":"11 95116-0848",
+//            "numFuncionario":3,
+//            "rua":"rua 1",
+//            "numero":342,
+//            "cep":"08032832",
+//            "bairro":"bairro b",
+//            "cidade":"cidade c"
+//    }
     @Id  // do javax.persistence
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmpresa;
