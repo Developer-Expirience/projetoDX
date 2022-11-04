@@ -76,7 +76,50 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return ResponseEntity.status(404).build();
     }
+    @PostMapping("/login/{empresa}/{senha}")
+    public ResponseEntity postLogin(@PathVariable String empresa, @PathVariable String senha){
+        List<Empresa> lista = repository.findAll();
+        for (Empresa e: lista){
+            if (e.getEmpresaAutenticado(empresa, senha)){
+                e.setEmpresaValidado(true);
+                repository.save(e);
+                return ResponseEntity.status(200).body(true);
+            }
+        }
+        return ResponseEntity.status(404).body(false);
+    }
 
+    @PostMapping("/logoff/{empresa}")
+    public ResponseEntity postLogoff(@PathVariable String empresa){
+        List<Empresa> lista = repository.findAll();
+        for (Empresa e: lista){
+            if (e.isEmpresaValidado()){
+                e.setEmpresaValidado(false);
+                repository.save(e);
+                return ResponseEntity.status(200).body(e.isEmpresaValidado());
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+    @GetMapping("/empresa-logado")
+    public ResponseEntity getEmpresaLogado(@RequestParam(required = false) String empresa){
+        List<Empresa> lista = repository.findAll();
+        List<Empresa> listaLogado = new ArrayList<>();
+        if (!(empresa == null)){
+            for (Empresa e: lista){
+                if (empresa.equals(e.getUsuario())){
+                    return ResponseEntity.status(200).body(e);
+                }
+            }
+        }else {
+            for (Empresa e: lista){
+                if (e.isEmpresaValidado()){
+                    listaLogado.add(e);
+                }
+            }
+        }
+        return listaLogado.isEmpty()? ResponseEntity.status(404).build() :ResponseEntity.status(200).body(listaLogado);
+    }
     public int getContador() {
         return contador;
     }

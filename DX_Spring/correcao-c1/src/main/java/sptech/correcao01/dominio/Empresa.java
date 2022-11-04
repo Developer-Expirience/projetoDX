@@ -50,6 +50,8 @@ public class Empresa implements Serializable {
     @CNPJ
     private String cnpj;
 
+    private boolean empresaValidado;
+
     @NotBlank
     @Pattern( // valida usando uma Regex (expressão regular)
             regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
@@ -90,6 +92,21 @@ public class Empresa implements Serializable {
     @NotBlank
     @Size(min = 3)
     private String cidade;
+
+    public boolean isEmpresaValidado() {
+        return empresaValidado;
+    }
+
+    public void setEmpresaValidado(boolean empresaValidado) {
+        this.empresaValidado = empresaValidado;
+    }
+
+    public boolean getEmpresaAutenticado(String usuario, String senha){
+        if (this.usuario.equals(usuario) && this.senha.equals(senha)){
+            setEmpresaValidado(true);
+        }
+        return empresaValidado;
+    }
 
     public Integer getIdEmpresa() {
         return idEmpresa;
