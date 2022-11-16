@@ -17,10 +17,10 @@ public class Vaga {
     private VagaId idVaga;
 
     @JoinColumn(name="id_usuario", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Usuario usuario;
 
-    @JoinColumn(name="id_usuario", insertable = false, updatable = false)
+    @JoinColumn(name="id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Empresa empresa;
 

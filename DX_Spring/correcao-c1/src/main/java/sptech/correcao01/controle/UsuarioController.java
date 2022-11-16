@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Usuario;
+import sptech.correcao01.dominio.Vaga;
+import sptech.correcao01.dominio.VagaId;
 import sptech.correcao01.repositorio.UsuarioRepository;
 
 import java.util.ArrayList;
@@ -29,10 +31,10 @@ public class UsuarioController {
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
         contador++;
-        Usuario u = novoUsuario;
-        u.setIdUsuario(contador);
+//        Usuario u = novoUsuario;
+        novoUsuario.setIdUsuario(contador);
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
-        lista.adiciona(u);
+        lista.adiciona(novoUsuario);
         ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
         repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
@@ -77,7 +79,7 @@ public class UsuarioController {
             }
         }else {
             for (Usuario u: lista){
-                if (u.isUsuarioValidado() == true){
+                if (u.isUsuarioValidado()){
                     listaLogado.add(u);
                 }
             }
@@ -103,6 +105,19 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
  */
         return ResponseEntity.of(repository.findById(id));
     }
+
+//    @PostMapping("/canditatar-vaga")
+//    public ResponseEntity canditarAVaga(int idVaga){
+//        Vaga v = new Vaga();
+//        VagaId vId = new VagaId();
+//        if (v.getIdVaga() == idVaga){
+//            vId.setEmpresaId();
+//            return ResponseEntity.status(200).build();
+//        }
+//
+//        return ResponseEntity.status(404).build();
+//    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(

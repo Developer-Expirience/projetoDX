@@ -24,10 +24,9 @@ public class EmpresaController {
     public ResponseEntity<Empresa> post(
             @RequestBody Empresa novaEmpresa) {
         contador++;
-        Empresa e = novaEmpresa;
-        e.setIdEmpresa(contador);
+        novaEmpresa.setIdEmpresa(contador);
         ListaObj<Empresa> lista = new ListaObj<>(getContador());
-        lista.adiciona(e);
+        lista.adiciona(novaEmpresa);
         ArqCsvEmpresa.gravaArquivoCsv(lista,"empresas");
         repository.save(novaEmpresa); // faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novaEmpresa);
