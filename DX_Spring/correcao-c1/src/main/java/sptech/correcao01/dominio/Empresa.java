@@ -12,6 +12,21 @@ import java.io.Serializable;
 @Entity
 public class Empresa implements Serializable {
 
+//    {
+//        "idEmpresa":1,
+//            "nome":"teste",
+//            "usuario":"testeEmpresa",
+//            "senha":"teste",
+//            "email":"teste@email.com",
+//            "cnpj":"80.117.186/0001-00",
+//            "telefone":"11 95116-0848",
+//            "numFuncionario":3,
+//            "rua":"rua 1",
+//            "numero":342,
+//            "cep":"08032832",
+//            "bairro":"bairro b",
+//            "cidade":"cidade c"
+//    }
     @Id  // do javax.persistence
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmpresa;
@@ -34,6 +49,8 @@ public class Empresa implements Serializable {
     @NotBlank
     @CNPJ
     private String cnpj;
+
+    private boolean empresaValidado;
 
     @NotBlank
     @Pattern( // valida usando uma Regex (expressão regular)
@@ -75,6 +92,21 @@ public class Empresa implements Serializable {
     @NotBlank
     @Size(min = 3)
     private String cidade;
+
+    public boolean isEmpresaValidado() {
+        return empresaValidado;
+    }
+
+    public void setEmpresaValidado(boolean empresaValidado) {
+        this.empresaValidado = empresaValidado;
+    }
+
+    public boolean getEmpresaAutenticado(String usuario, String senha){
+        if (this.usuario.equals(usuario) && this.senha.equals(senha)){
+            setEmpresaValidado(true);
+        }
+        return empresaValidado;
+    }
 
     public Integer getIdEmpresa() {
         return idEmpresa;

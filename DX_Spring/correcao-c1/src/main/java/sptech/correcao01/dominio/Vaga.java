@@ -36,9 +36,37 @@ public class Vaga {
 
     @NotNull
     private Double valor;
-
+    @NotNull
+    private String senioridade;
+    @NotNull
+    private String titulo;
+    @NotNull
+    private String tecnologia;
     @NotNull
     private Integer tempEstimado;
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getSenioridade() {
+        return senioridade;
+    }
+
+    public void setSenioridade(String senioridade) {
+        this.senioridade = senioridade;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
+    }
+
+    public void setTecnologia(String tecnologia) {
+        this.tecnologia = tecnologia;
+    }
 
 
     public Integer getIdVaga() {
@@ -101,6 +129,7 @@ public class Vaga {
     public String getDescricao() {
         return descricao;
     }
+
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
