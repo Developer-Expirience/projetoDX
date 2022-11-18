@@ -29,7 +29,7 @@ public class VagaController {
     @Autowired
     private VagaRepository repository;
 
-    private int contador;
+    private  int contador;
 
 
     @PostMapping
@@ -39,6 +39,7 @@ public class VagaController {
         Vaga v = novoVaga;
         v.setIdVaga(contador);
         ListaObj<Vaga> lista = new ListaObj<>(getContador());
+
         lista.adiciona(v);
         ArqCsvVaga.gravaArquivoCsv(lista,"vagas");
         repository.save(novoVaga);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
@@ -48,7 +49,7 @@ public class VagaController {
     @GetMapping
     public ResponseEntity<List<Vaga>> get() {
         List<Vaga> lista = repository.findAll(); // faz um "select * from" da tabela
-        ArqCsvVaga.leExibeArquivoCsv("vagas");
+       // ArqCsvVaga.leExibeArquivoCsv("vagas");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);

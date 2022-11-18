@@ -43,7 +43,9 @@ public class PilhaObj <T>{
     }
 
     public void exibe() {
-
+        for (int i = 0; i < topo; i++) {
+            System.out.println(pilha[i]);
+        }
     }
 
     //Getters - Não retirar

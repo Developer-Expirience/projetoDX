@@ -39,7 +39,7 @@ public class ArqCsvVaga {
             for (int i = 0; i < lista.getTamanho(); i++) {
                 Vaga vaga = lista.getElemento(i);
                 saida.format("%d;%s;%d;%.2f\n",
-                        vaga.getIdVaga(), vaga.getDescricao(),
+                        vaga.getIdVaga(), vaga.getTitulo(),
                         vaga.getTempEstimado(), vaga.getValor());
             }
 

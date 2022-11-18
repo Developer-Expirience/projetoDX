@@ -211,4 +211,24 @@ public class Empresa implements Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "idEmpresa=" + idEmpresa +
+                ", nome='" + nome + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", senha='" + senha + '\'' +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", empresaValidado=" + empresaValidado +
+                ", telefone='" + telefone + '\'' +
+                ", numFuncionario=" + numFuncionario +
+                ", rua='" + rua + '\'' +
+                ", numero=" + numero +
+                ", cep='" + cep + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                '}';
+    }
 }

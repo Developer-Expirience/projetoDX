@@ -28,11 +28,6 @@ public class Vaga {
     @Column(name = "dh_vaga")
     private LocalDateTime dataVaga;
 
-    private String seneriodade;
-
-    private String tipoTecnologia;
-    @NotBlank
-    private String descricao;
 
     @NotNull
     private Double valor;
@@ -110,30 +105,6 @@ public class Vaga {
         this.dataVaga = dataVaga;
     }
 
-    public String getSeneriodade() {
-        return seneriodade;
-    }
-
-    public void setSeneriodade(String seneriodade) {
-        this.seneriodade = seneriodade;
-    }
-
-    public String getTipoTecnologia() {
-        return tipoTecnologia;
-    }
-
-    public void setTipoTecnologia(String tipoTecnologia) {
-        this.tipoTecnologia = tipoTecnologia;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public Double getValor() {
         return valor;
@@ -151,5 +122,19 @@ public class Vaga {
         this.tempEstimado = tempEstimado;
     }
 
-
+    @Override
+    public String toString() {
+        return "Vaga{" +
+                "id=" + id +
+                ", idVaga=" + idVaga +
+                ", usuario=" + usuario +
+                ", empresa=" + empresa +
+                ", dataVaga=" + dataVaga +
+                ", valor=" + valor +
+                ", senioridade='" + senioridade + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", tecnologia='" + tecnologia + '\'' +
+                ", tempEstimado=" + tempEstimado +
+                '}';
+    }
 }

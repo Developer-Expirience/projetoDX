@@ -44,6 +44,12 @@ public class FilaObj <T> {
         return primeiro;
     }
 
+    public void exibe() {
+        for (int i = 0; i < tamanho; i++) {
+            System.out.println(fila[i]);
+        }
+    }
+
     public int getTamanho() {
         return tamanho;
     }

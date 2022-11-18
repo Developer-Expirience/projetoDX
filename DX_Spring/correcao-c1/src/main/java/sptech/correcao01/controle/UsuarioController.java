@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sptech.correcao01.ListaObj;
-import sptech.correcao01.dominio.Usuario;
-import sptech.correcao01.dominio.Vaga;
-import sptech.correcao01.dominio.VagaId;
+import sptech.correcao01.dominio.*;
 import sptech.correcao01.repositorio.UsuarioRepository;
 
 import java.util.ArrayList;
@@ -17,15 +15,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
     /*
-
     */
 
     @Autowired
     private UsuarioRepository repository;
     private int contador;
 
+    private List<Usuario> usuarios;
+
+    private PilhaObj<Vaga> pilhaDesfazer;
+    private FilaObj<Vaga> filaVagasDoUsuario;
+    private FilaObj<Usuario> filaDeCandidatos;
+
+    public UsuarioController() {
+        this.usuarios = new ArrayList<>();
+        this.pilhaDesfazer = new PilhaObj<>(10);
+        this.filaVagasDoUsuario = new FilaObj<>(10);
+        this.filaDeCandidatos = new FilaObj<>(10);
+    }
 
     @PostMapping
     public ResponseEntity<Usuario> post(
@@ -36,6 +44,7 @@ public class UsuarioController {
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
         lista.adiciona(novoUsuario);
         ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
+        usuarios.add(novoUsuario);
         repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoUsuario);
 
@@ -106,17 +115,28 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
         return ResponseEntity.of(repository.findById(id));
     }
 
-//    @PostMapping("/canditatar-vaga")
-//    public ResponseEntity canditarAVaga(int idVaga){
-//        Vaga v = new Vaga();
-//        VagaId vId = new VagaId();
-//        if (v.getIdVaga() == idVaga){
-//            vId.setEmpresaId();
-//            return ResponseEntity.status(200).build();
-//        }
-//
-//        return ResponseEntity.status(404).build();
-//    }
+    @PostMapping("/candidatar-vaga/{idVaga}/{idUsuario}")
+    public ResponseEntity<Boolean> canditarAVaga(@PathVariable int idVaga, @PathVariable int idUsuario,
+                                                 Vaga vaga, VagaId vagaId){
+        Boolean existe = false;
+        for (int i = 0; i < 3; i++) {
+            if (vaga.getIdVaga() == idVaga && usuarios.get(i).getIdUsuario() == idUsuario) {
+                filaVagasDoUsuario.insert(vaga);
+                filaDeCandidatos.insert(usuarios.get(i));
+                pilhaDesfazer.push(vaga);
+                VagaController vagaController = new VagaController();
+                vagaController.put(idVaga, vaga);
+                vagaId.setUsuarioId(idUsuario);
+                existe = true;
+                filaDeCandidatos.exibe();
+                filaVagasDoUsuario.exibe();
+                pilhaDesfazer.exibe();
+                return ResponseEntity.status(200).body(existe);
+            }
+        }
+
+        return ResponseEntity.status(404).body(existe);
+    }
 
 
     @DeleteMapping("/{id}")
