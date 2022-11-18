@@ -13,6 +13,8 @@ import java.util.List;
 
 public class ArqTxtUsuario {
 
+    @Autowired
+    private static UsuarioRepository repository;
 
     public static void gravaRegistro(String registro, String nomeArq) {
         BufferedWriter saida = null;
@@ -152,7 +154,7 @@ public class ArqTxtUsuario {
                             bairro, cidade, complemento, telefone);
 
                     // No Projeto de PI, pode fazer
-                    // repository.save(a)
+                    repository.save(usuario);
 
                     // No nosso caso, como não estamos conectados ao banco
                     // vamos adicionar o objeto a na listaLida
