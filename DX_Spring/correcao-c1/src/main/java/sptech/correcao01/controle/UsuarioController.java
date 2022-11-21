@@ -6,10 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.*;
+import sptech.correcao01.repositorio.EmpresaRepository;
 import sptech.correcao01.repositorio.UsuarioRepository;
+import sptech.correcao01.repositorio.VagaEmpresaUsuarioRepository;
+import sptech.correcao01.repositorio.VagaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -20,13 +24,23 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+
+    @Autowired
+    private VagaEmpresaUsuarioRepository vagaEmpresaUsuarioRepository;
+
+    @Autowired
+    private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private VagaRepository vagaRepository;
+
     private int contador;
 
     private List<Usuario> usuarios;
 
-    private PilhaObj<Vaga> pilhaDesfazer;
-    private FilaObj<Vaga> filaVagasDoUsuario;
-    private FilaObj<Usuario> filaDeCandidatos;
+    private PilhaObj<Integer> pilhaDesfazer;
+    private FilaObj<Integer> filaVagasDoUsuario;
+    private FilaObj<Integer> filaDeCandidatos;
 
     public UsuarioController() {
         this.usuarios = new ArrayList<>();
@@ -115,27 +129,34 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
         return ResponseEntity.of(repository.findById(id));
     }
 
-    @PostMapping("/candidatar-vaga/{idVaga}/{idUsuario}")
-    public ResponseEntity<Boolean> canditarAVaga(@PathVariable int idVaga, @PathVariable int idUsuario,
-                                                 Vaga vaga, VagaId vagaId){
-        Boolean existe = false;
-        for (int i = 0; i < 3; i++) {
-            if (vaga.getIdVaga() == idVaga && usuarios.get(i).getIdUsuario() == idUsuario) {
-                filaVagasDoUsuario.insert(vaga);
-                filaDeCandidatos.insert(usuarios.get(i));
-                pilhaDesfazer.push(vaga);
-                VagaController vagaController = new VagaController();
-                vagaController.put(idVaga, vaga);
-                vagaId.setUsuarioId(idUsuario);
-                existe = true;
-                filaDeCandidatos.exibe();
-                filaVagasDoUsuario.exibe();
-                pilhaDesfazer.exibe();
-                return ResponseEntity.status(200).body(existe);
-            }
+    @PostMapping("/candidatar-vaga")
+    public ResponseEntity canditarAVaga(@RequestBody VagaEmpresaUsuario vagaEmpresaUsuario){
+        //Vaga vaga, VagaId vagaId
+
+        if (!vagaRepository.existsById(vagaEmpresaUsuario.getVaga().getId())){
+            return ResponseEntity.status(404).body("Id da vaga não existe");
         }
 
-        return ResponseEntity.status(404).body(existe);
+        if (!repository.existsById(vagaEmpresaUsuario.getUsuario().getIdUsuario())){
+            return ResponseEntity.status(404).body("Id da vaga não existe");
+        }
+
+        if (!empresaRepository.existsById(vagaEmpresaUsuario.getEmpresa().getIdEmpresa())){
+            return ResponseEntity.status(404).body("Id da vaga não existe");
+        }
+        filaVagasDoUsuario.insert(vagaEmpresaUsuario.getVaga().getId());
+        filaDeCandidatos.insert(vagaEmpresaUsuario.getUsuario().getIdUsuario());
+        pilhaDesfazer.push(vagaEmpresaUsuario.getVaga().getId());
+        return ResponseEntity.status(201).body(vagaEmpresaUsuarioRepository.save(vagaEmpresaUsuario));
+
+    }
+
+    @GetMapping("/vagas/{idUsuario}")
+    public ResponseEntity<List<VagaEmpresaUsuario>> getVagasPorUsuario(@PathVariable Integer idUsuario){
+
+        return repository.existsById(idUsuario)
+                ? ResponseEntity.status(200).body(vagaEmpresaUsuarioRepository.findByUsuarioIdUsuario(idUsuario))
+                : ResponseEntity.status(404).build();
     }
 
 

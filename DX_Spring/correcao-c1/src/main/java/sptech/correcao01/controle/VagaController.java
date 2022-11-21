@@ -37,11 +37,11 @@ public class VagaController {
             @RequestBody Vaga novoVaga) {
         contador++;
         Vaga v = novoVaga;
-        v.setIdVaga(contador);
+//        v.setIdVaga(contador);
         ListaObj<Vaga> lista = new ListaObj<>(getContador());
 
         lista.adiciona(v);
-        ArqCsvVaga.gravaArquivoCsv(lista,"vagas");
+//        ArqCsvVaga.gravaArquivoCsv(lista,"vagas");
         repository.save(novoVaga);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
         return ResponseEntity.status(201).body(novoVaga);
     }
@@ -79,7 +79,7 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
     public ResponseEntity<Vaga> put(
             @PathVariable int id, @RequestBody Vaga vaga) {
         if (repository.existsById(id)) {
-            vaga.setIdVaga(id);
+//            vaga.setIdVaga(id);
             repository.save(vaga); // faz um "update" pois o id existe
             return ResponseEntity.status(200).body(vaga);
         }
