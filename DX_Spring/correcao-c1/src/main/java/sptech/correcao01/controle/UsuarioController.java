@@ -1,12 +1,12 @@
 package sptech.correcao01.controle;
 
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.*;
 import sptech.correcao01.repositorio.UsuarioRepository;
+import sptech.correcao01.repositorio.VagaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,10 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+
+
+    @Autowired
+    private VagaRepository vagaRepository;
     private int contador;
 
     private List<Usuario> usuarios;
@@ -124,6 +128,7 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
                 filaVagasDoUsuario.insert(vaga);
                 filaDeCandidatos.insert(usuarios.get(i));
                 pilhaDesfazer.push(vaga);
+                vagaRepository.save(vaga);
                 VagaController vagaController = new VagaController();
                 vagaController.put(idVaga, vaga);
                 vagaId.setUsuarioId(idUsuario);

@@ -1,12 +1,12 @@
 package sptech.correcao01.dominio;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class VagaId implements Serializable {
+
     @Column(name = "id_usuario")
     private Integer usuarioId;
 
@@ -46,4 +46,5 @@ public class VagaId implements Serializable {
         result = 31 * result + (empresaId != null ? empresaId.hashCode() : 0);
         return result;
     }
+
 }
