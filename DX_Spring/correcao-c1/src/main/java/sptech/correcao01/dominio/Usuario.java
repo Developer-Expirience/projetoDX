@@ -74,6 +74,9 @@ public class Usuario implements Serializable {
 
     private String telefone;
 
+    public Usuario() {
+    }
+
     public Usuario(Integer idUsuario, String usuario, LocalDate dataNascimento, String nome, String email,
                    String cpf, String rua, Integer numero, String cep, String bairro, String cidade, String complemento,
                    String telefone) {

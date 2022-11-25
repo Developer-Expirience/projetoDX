@@ -82,6 +82,9 @@ public class Empresa implements Serializable {
     @Size(min = 3)
     private String cidade;
 
+    public Empresa() {
+    }
+
     public Empresa(Integer idEmpresa, String nome, String usuario, String email, String cnpj,
                    String telefone, Integer numFuncionario, String rua, Integer numero, String cep, String bairro,
                    String cidade) {
