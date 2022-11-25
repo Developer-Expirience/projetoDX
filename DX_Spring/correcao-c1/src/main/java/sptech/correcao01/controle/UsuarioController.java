@@ -13,7 +13,6 @@ import sptech.correcao01.repositorio.VagaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -148,7 +147,6 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
         filaDeCandidatos.insert(vagaEmpresaUsuario.getUsuario().getIdUsuario());
         pilhaDesfazer.push(vagaEmpresaUsuario.getVaga().getId());
         return ResponseEntity.status(201).body(vagaEmpresaUsuarioRepository.save(vagaEmpresaUsuario));
-
     }
 
     @GetMapping("/vagas/{idUsuario}")
