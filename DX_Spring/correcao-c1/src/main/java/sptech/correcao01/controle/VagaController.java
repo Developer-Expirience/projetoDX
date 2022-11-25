@@ -16,7 +16,7 @@ public class VagaController {
 
     /*
         {
-           "idVaga": 0,
+        "idVaga": 0,
         "descricao": "",
         "valor": 0.00,
         "senioridade": "",

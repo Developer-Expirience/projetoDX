@@ -49,7 +49,7 @@ public class ArqTxtVaga {
                 for (Vaga vaga : lista) {
                     corpo = "02";
                     corpo += String.format("%06d", vaga.getIdVaga());
-                    corpo += String.format("%-25.25s", vaga.getDescricao());
+                    corpo += String.format("%-25.25s", vaga.getTitulo());
                     corpo += String.format("%6.2f", vaga.getValor());
                     corpo += String.format("%4d", vaga.getTempEstimado());
                     gravaRegistro(corpo, nomeArq);

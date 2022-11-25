@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Vaga {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,14 +31,14 @@ public class Vaga {
     }
 
     public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
-        this.idVaga = idVaga;
-        this.descricao = descricao;
+        this.id = idVaga;
+        this.titulo = descricao;
         this.valor = valor;
         this.tempEstimado = tempEstimado;
     }
 
     public Integer getIdVaga() {
-        return idVaga;
+        return id;
     }
     
     public Integer getId() {
@@ -96,8 +94,8 @@ public class Vaga {
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + idVaga +
-                ", descricao='" + descricao + '\'' +
+                "idVaga=" + id +
+                ", descricao='" + titulo + '\'' +
                 ", valor=" + valor +
                 ", tempEstimado=" + tempEstimado +
                 '}';
