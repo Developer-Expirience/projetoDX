@@ -9,5 +9,5 @@ import java.util.List;
 public interface UsuarioRepository extends
             JpaRepository<Usuario, Integer> {
 
-
+    Usuario findByUsuario(String usuario);
     }

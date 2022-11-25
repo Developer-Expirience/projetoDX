@@ -1,6 +1,5 @@
 package sptech.correcao01.controle;
 
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +10,7 @@ import sptech.correcao01.repositorio.UsuarioRepository;
 import sptech.correcao01.repositorio.VagaEmpresaUsuarioRepository;
 import sptech.correcao01.repositorio.VagaRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-    /*
-    */
+
 
     @Autowired
     private UsuarioRepository repository;
@@ -52,13 +51,13 @@ public class UsuarioController {
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
         contador++;
-//        Usuario u = novoUsuario;
+
         novoUsuario.setIdUsuario(contador);
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
         lista.adiciona(novoUsuario);
         ArqCsvUsuario.gravaArquivoCsv(lista,"usuarios");
         usuarios.add(novoUsuario);
-        repository.save(novoUsuario);// faz um insert ou update, dependendo de a chave primária existe ou não no banco
+        repository.save(novoUsuario);
         return ResponseEntity.status(201).body(novoUsuario);
 
     }
@@ -111,7 +110,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
-        List<Usuario> lista = repository.findAll(); // faz um "select * from" da tabela
+        List<Usuario> lista = repository.findAll();
         ArqCsvUsuario.leExibeArquivoCsv("usuarios");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
@@ -121,10 +120,6 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> get(
             @PathVariable int id) {
-/*
-Se o findById() encontrar valor, ele será usado no corpo da resposta e o status da resposta será 200
-Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
- */
         return ResponseEntity.of(repository.findById(id));
     }
 
@@ -148,6 +143,21 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
         pilhaDesfazer.push(vagaEmpresaUsuario.getVaga().getId());
         return ResponseEntity.status(201).body(vagaEmpresaUsuarioRepository.save(vagaEmpresaUsuario));
     }
+    @Transactional
+    @DeleteMapping("/login/{usuario}/{senha}/desfazer")
+    public ResponseEntity desfazerPilha(@PathVariable String usuario, @PathVariable String senha) {
+        if (pilhaDesfazer.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+        Integer pilhaDesfazerMemoria = pilhaDesfazer.getTopo();
+        Integer idDeletado = pilhaDesfazer.peek();
+        postLogin(usuario, senha);
+        pilhaDesfazer.pop();
+        Usuario usuarioBanco = repository.findByUsuario(usuario);
+        vagaEmpresaUsuarioRepository.deleteByIdUsuarioAndIdVaga(usuarioBanco.getIdUsuario(),idDeletado);
+        return ResponseEntity.status(200).body(idDeletado);
+
+    }
 
     @GetMapping("/vagas/{idUsuario}")
     public ResponseEntity<List<VagaEmpresaUsuario>> getVagasPorUsuario(@PathVariable Integer idUsuario){
@@ -157,16 +167,12 @@ Caso contrário, o status da resposta será 404 e não haverá corpo na resposta
                 : ResponseEntity.status(404).build();
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable int id) {
-/*
-O existsById() faz um "select count(*)..." para saber se o id existe na tabela
- */
         if (repository.existsById(id)) {
             repository.deleteById(id);
-// O deleteById() faz um "delete from... where id=..."
+
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(404).build();
@@ -177,7 +183,7 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
             @PathVariable int id, @RequestBody Usuario usuario) {
         if (repository.existsById(id)) {
             usuario.setIdUsuario(id);
-            repository.save(usuario); // faz um "update" pois o id existe
+            repository.save(usuario);
             return ResponseEntity.status(200).body(usuario);
         }
         return ResponseEntity.status(404).build();
@@ -185,7 +191,6 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
     public int getContador() {
         return contador;
     }
-
 }
 
 

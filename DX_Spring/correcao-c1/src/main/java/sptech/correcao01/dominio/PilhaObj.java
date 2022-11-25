@@ -32,6 +32,9 @@ public class PilhaObj <T>{
     }
 
     public T pop() {
+        if (isEmpty()) {
+            return null;
+        }
         return pilha[topo--];
     }
 
