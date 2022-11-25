@@ -74,6 +74,24 @@ public class Usuario implements Serializable {
 
     private String telefone;
 
+    public Usuario(Integer idUsuario, String usuario, LocalDate dataNascimento, String nome, String email,
+                   String cpf, String rua, Integer numero, String cep, String bairro, String cidade, String complemento,
+                   String telefone) {
+        this.idUsuario = idUsuario;
+        this.usuario = usuario;
+        this.dataNascimento = dataNascimento;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.complemento = complemento;
+        this.telefone = telefone;
+    }
+    
     public boolean isUsuarioValidado() {
         return usuarioValidado;
     }
@@ -87,6 +105,7 @@ public class Usuario implements Serializable {
              setUsuarioValidado(true);
         }
         return usuarioValidado;
+
     }
 
     public Integer getIdUsuario() {

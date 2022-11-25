@@ -1,0 +1,4 @@
+USUARIO31-10-2022 20:54:5601
+02123456erick          2022-05-31Erick          erick@gmail.com        12345678990Rua Sete de Setembro012312345678Bairro da Luz       São Paulo Apartamento 14      11 91234-4321
+02333456raul           2022-03-31Raul           raul@gmail.com         33345691320Avenida Nove de Julh030087654321Bairro da Cidade    São Paulo Apartamento 40      11 93344-4895
+010000000002

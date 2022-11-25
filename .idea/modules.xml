@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DX_Spring/correcao-c1/correcao-c1.iml" filepath="$PROJECT_DIR$/DX_Spring/correcao-c1/correcao-c1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/projetoDX.iml" filepath="$PROJECT_DIR$/.idea/projetoDX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strategy/strategy.iml" filepath="$PROJECT_DIR$/strategy/strategy.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/projetoDX.iml" filepath="$PROJECT_DIR$/.idea/projetoDX.iml" />
     </modules>
   </component>

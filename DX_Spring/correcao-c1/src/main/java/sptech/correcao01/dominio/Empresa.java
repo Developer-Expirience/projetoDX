@@ -63,17 +63,6 @@ public class Empresa implements Serializable {
     private Integer numFuncionario;
 
 
-
-    // @NotBlank // ERRO COMUM! NotBlank é só para String. Obrigatório p/ os demais tipos é @NotNull
-//    @NotNull // do pacote javax.validation - valida se o campo está presente e não é null
-//    @Min(0) // valida se o valor é pelo menos 0
-    // @DecimalMin("0.01") // para numeros reais (Double, Float, BigDecimal)
-//    @Negative
-//    @NegativeOrZero
-//    @Positive
-//    @PositiveOrZero
-//    private Integer filhos;
-
     @NotBlank
     @Size(min = 5)
     private String rua;
@@ -93,6 +82,22 @@ public class Empresa implements Serializable {
     @Size(min = 3)
     private String cidade;
 
+    public Empresa(Integer idEmpresa, String nome, String usuario, String email, String cnpj,
+                   String telefone, Integer numFuncionario, String rua, Integer numero, String cep, String bairro,
+                   String cidade) {
+        this.idEmpresa = idEmpresa;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.email = email;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.numFuncionario = numFuncionario;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
     public boolean isEmpresaValidado() {
         return empresaValidado;
     }
@@ -106,6 +111,7 @@ public class Empresa implements Serializable {
             setEmpresaValidado(true);
         }
         return empresaValidado;
+
     }
 
     public Integer getIdEmpresa() {
@@ -218,6 +224,8 @@ public class Empresa implements Serializable {
                 "idEmpresa=" + idEmpresa +
                 ", nome='" + nome + '\'' +
                 ", usuario='" + usuario + '\'' +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
                 ", senha='" + senha + '\'' +
                 ", email='" + email + '\'' +
                 ", cnpj='" + cnpj + '\'' +
