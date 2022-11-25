@@ -63,6 +63,8 @@ public class Usuario implements Serializable {
     @Size(min = 5)
     private String complemento;
 
+    private boolean usuarioValidado;
+
     @NotBlank
     @Pattern( // valida usando uma Regex (expressão regular)
         regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
@@ -88,6 +90,22 @@ public class Usuario implements Serializable {
         this.cidade = cidade;
         this.complemento = complemento;
         this.telefone = telefone;
+    }
+    
+    public boolean isUsuarioValidado() {
+        return usuarioValidado;
+    }
+
+    public void setUsuarioValidado(boolean usuarioValidado) {
+        this.usuarioValidado = usuarioValidado;
+    }
+
+    public boolean getUsuarioAutenticado(String usuario, String senha){
+        if (this.usuario.equals(usuario) && this.senha.equals(senha)){
+             setUsuarioValidado(true);
+        }
+        return usuarioValidado;
+
     }
 
     public Integer getIdUsuario() {
@@ -207,6 +225,7 @@ public class Usuario implements Serializable {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +
                 ", usuario='" + usuario + '\'' +
+                ", senha='" + senha + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
@@ -217,6 +236,7 @@ public class Usuario implements Serializable {
                 ", bairro='" + bairro + '\'' +
                 ", cidade='" + cidade + '\'' +
                 ", complemento='" + complemento + '\'' +
+                ", usuarioValidado=" + usuarioValidado +
                 ", telefone='" + telefone + '\'' +
                 '}';
     }

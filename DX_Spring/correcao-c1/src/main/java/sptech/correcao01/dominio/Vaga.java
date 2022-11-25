@@ -1,11 +1,12 @@
 package sptech.correcao01.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Vaga {
@@ -14,16 +15,19 @@ public class Vaga {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVaga;
-
-    @NotBlank
-    private String descricao;
+    private Integer id;
 
     @NotNull
     private Double valor;
-
+    @NotNull
+    private String senioridade;
+    @NotNull
+    private String titulo;
+    @NotNull
+    private String tecnologia;
     @NotNull
     private Integer tempEstimado;
+
 
     public Vaga() {
     }
@@ -38,18 +42,39 @@ public class Vaga {
     public Integer getIdVaga() {
         return idVaga;
     }
-
-    public void setIdVaga(Integer idVaga) {
-        this.idVaga = idVaga;
+    
+    public Integer getId() {
+        return id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getTitulo() {
+        return titulo;
     }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getSenioridade() {
+        return senioridade;
+    }
+
+    public void setSenioridade(String senioridade) {
+        this.senioridade = senioridade;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
+    }
+
+    public void setTecnologia(String tecnologia) {
+        this.tecnologia = tecnologia;
+    }
+
 
     public Double getValor() {
         return valor;
@@ -66,6 +91,7 @@ public class Vaga {
     public void setTempEstimado(Integer tempEstimado) {
         this.tempEstimado = tempEstimado;
     }
+
 
     @Override
     public String toString() {

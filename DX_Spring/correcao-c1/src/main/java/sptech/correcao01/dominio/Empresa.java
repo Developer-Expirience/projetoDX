@@ -12,6 +12,21 @@ import java.io.Serializable;
 @Entity
 public class Empresa implements Serializable {
 
+//    {
+//        "idEmpresa":1,
+//            "nome":"teste",
+//            "usuario":"testeEmpresa",
+//            "senha":"teste",
+//            "email":"teste@email.com",
+//            "cnpj":"80.117.186/0001-00",
+//            "telefone":"11 95116-0848",
+//            "numFuncionario":3,
+//            "rua":"rua 1",
+//            "numero":342,
+//            "cep":"08032832",
+//            "bairro":"bairro b",
+//            "cidade":"cidade c"
+//    }
     @Id  // do javax.persistence
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmpresa;
@@ -35,6 +50,8 @@ public class Empresa implements Serializable {
     @CNPJ
     private String cnpj;
 
+    private boolean empresaValidado;
+
     @NotBlank
     @Pattern( // valida usando uma Regex (expressão regular)
             regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
@@ -45,17 +62,6 @@ public class Empresa implements Serializable {
     @Min(1)
     private Integer numFuncionario;
 
-
-
-    // @NotBlank // ERRO COMUM! NotBlank é só para String. Obrigatório p/ os demais tipos é @NotNull
-//    @NotNull // do pacote javax.validation - valida se o campo está presente e não é null
-//    @Min(0) // valida se o valor é pelo menos 0
-    // @DecimalMin("0.01") // para numeros reais (Double, Float, BigDecimal)
-//    @Negative
-//    @NegativeOrZero
-//    @Positive
-//    @PositiveOrZero
-//    private Integer filhos;
 
     @NotBlank
     @Size(min = 5)
@@ -91,6 +97,21 @@ public class Empresa implements Serializable {
         this.cep = cep;
         this.bairro = bairro;
         this.cidade = cidade;
+    }
+    public boolean isEmpresaValidado() {
+        return empresaValidado;
+    }
+
+    public void setEmpresaValidado(boolean empresaValidado) {
+        this.empresaValidado = empresaValidado;
+    }
+
+    public boolean getEmpresaAutenticado(String usuario, String senha){
+        if (this.usuario.equals(usuario) && this.senha.equals(senha)){
+            setEmpresaValidado(true);
+        }
+        return empresaValidado;
+
     }
 
     public Integer getIdEmpresa() {
@@ -205,6 +226,10 @@ public class Empresa implements Serializable {
                 ", usuario='" + usuario + '\'' +
                 ", email='" + email + '\'' +
                 ", cnpj='" + cnpj + '\'' +
+                ", senha='" + senha + '\'' +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", empresaValidado=" + empresaValidado +
                 ", telefone='" + telefone + '\'' +
                 ", numFuncionario=" + numFuncionario +
                 ", rua='" + rua + '\'' +
