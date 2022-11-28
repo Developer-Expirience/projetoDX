@@ -11,7 +11,7 @@ import sptech.correcao01.repositorio.EmpresaRepository;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/empresas")
 public class EmpresaController {

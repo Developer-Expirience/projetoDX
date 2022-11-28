@@ -107,6 +107,9 @@ public class Usuario implements Serializable {
     public boolean getUsuarioAutenticado(String usuario, String senha){
         if (this.usuario.equals(usuario) && this.senha.equals(senha)){
              setUsuarioValidado(true);
+             return usuarioValidado;
+        }else {
+           setUsuarioValidado(false);
         }
         return usuarioValidado;
 

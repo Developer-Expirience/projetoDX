@@ -59,7 +59,12 @@ public class UsuarioController {
         usuarios.add(novoUsuario);
         repository.save(novoUsuario);
         return ResponseEntity.status(201).body(novoUsuario);
+    }
 
+    @GetMapping("/sessao/{usuario}")
+    public ResponseEntity<Usuario> getUsuarioSession(@PathVariable String usuario){
+        Usuario usuarioBanco = repository.findByUsuario(usuario);
+        return ResponseEntity.status(200).body(usuarioBanco);
     }
 
     @PostMapping("/login/{usuario}/{senha}")
