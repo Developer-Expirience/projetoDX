@@ -200,12 +200,9 @@ public class ArqTxtUsuario {
                 "Apartamento 40", "11 93344-4895"));
 
 
-        System.out.println("Lista original:");
-        for (Usuario usuario : lista) {
-            System.out.println(usuario);
-        }
 
-        //gravaArquivoTxt(lista, "usuarios.txt");
-        leArquivoTxt("usuarios.txt");
+
+        gravaArquivoTxt(lista, "usuarios.txt");
+        //leArquivoTxt("usuarios.txt");
     }
 }

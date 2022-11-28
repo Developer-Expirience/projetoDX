@@ -225,7 +225,6 @@ public class Usuario implements Serializable {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +
                 ", usuario='" + usuario + '\'' +
-                ", senha='" + senha + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +

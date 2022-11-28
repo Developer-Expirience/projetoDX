@@ -32,15 +32,15 @@ public class Vaga {
     public Vaga() {
     }
 
-    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
-        this.idVaga = idVaga;
-        this.descricao = descricao;
+    public Vaga(Integer id, String titulo, Double valor, Integer tempEstimado) {
+        this.id = id;
+        this.titulo = titulo;
         this.valor = valor;
         this.tempEstimado = tempEstimado;
     }
 
     public Integer getIdVaga() {
-        return idVaga;
+        return id;
     }
     
     public Integer getId() {
@@ -96,8 +96,8 @@ public class Vaga {
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + idVaga +
-                ", descricao='" + descricao + '\'' +
+                "idVaga=" + id +
+                ", descricao='" + titulo + '\'' +
                 ", valor=" + valor +
                 ", tempEstimado=" + tempEstimado +
                 '}';

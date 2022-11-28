@@ -1,6 +1,8 @@
 package sptech.correcao01.controle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sptech.correcao01.dominio.Empresa;
+import sptech.correcao01.repositorio.EmpresaRepository;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -9,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArqTxtEmpresa {
+
+    @Autowired
+    private static EmpresaRepository repository;
     
             public static void gravaRegistro(String registro, String nomeArq) {
                 BufferedWriter saida = null;
@@ -145,8 +150,8 @@ public class ArqTxtEmpresa {
                                     numFuncionario, rua, numero, cep, bairro, cidade);
     
                             // No Projeto de PI, pode fazer
-                            // repository.save(a)
-    
+                                repository.save(empresa);
+
                             // No nosso caso, como não estamos conectados ao banco
                             // vamos adicionar o objeto a na listaLida
                             listaLida.add(empresa);
@@ -182,7 +187,7 @@ public class ArqTxtEmpresa {
     
                 lista.add(new Empresa( 106714,"João Victor", "JV",
                         "Estrutura.de.Dados@gmail", "03.733.596/0001-27", "11 91111-1111",
-                        10000600, "Ruapprimerihotyrhcop", 2456, "20202099", "Gru", "Rio"));
+                        10000600, "Rua Primeiro de Setembro", 2456, "20202099", "Gru", "Rio"));
                 lista.add(new Empresa( 123456,"Erick Cardazo", "EC",
                         "pw.de.sp@gmail", "03.733.596/0001-27", "11 91111-1111",
                         10000600, "Ruapprimerihotyrhcop",3456, "20202099", "Gru", "Rio"));
@@ -192,8 +197,8 @@ public class ArqTxtEmpresa {
                     System.out.println(empresa);
                 }
     
-            gravaArquivoTxt(lista, "Empresas.txt");
-               //leArquivoTxt("Empresas.txt");
+                gravaArquivoTxt(lista, "Empresas.txt");
+                //leArquivoTxt("Empresas.txt");
         }
 
 }
