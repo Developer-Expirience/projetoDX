@@ -14,8 +14,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@CrossOrigin
 @RestController
+
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -51,7 +52,6 @@ public class UsuarioController {
     public ResponseEntity<Usuario> post(
             @RequestBody Usuario novoUsuario) {
         contador++;
-
         novoUsuario.setIdUsuario(contador);
         ListaObj<Usuario> lista = new ListaObj<>(getContador());
         lista.adiciona(novoUsuario);

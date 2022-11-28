@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.security.Timestamp;
 import java.time.LocalDate;
 
 @Entity

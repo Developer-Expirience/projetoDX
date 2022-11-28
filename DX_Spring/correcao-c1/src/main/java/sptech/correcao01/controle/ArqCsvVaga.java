@@ -23,8 +23,6 @@ public class ArqCsvVaga {
         Boolean deuRuim = false;
         nomeArq += ".csv"; // acrescenta a extensão csv ao nome do arquivo
 
-        // Bloco try-catch para abri o arquivo
-
         try {
             arq = new FileWriter(nomeArq, true);
             saida = new Formatter(arq);
