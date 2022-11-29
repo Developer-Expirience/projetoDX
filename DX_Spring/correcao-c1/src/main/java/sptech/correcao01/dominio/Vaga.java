@@ -30,6 +30,7 @@ public class Vaga {
     public Vaga() {
     }
 
+
     public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
         this.id = idVaga;
         this.titulo = descricao;
@@ -37,9 +38,7 @@ public class Vaga {
         this.tempEstimado = tempEstimado;
     }
 
-    public Integer getIdVaga() {
-        return id;
-    }
+
     
     public Integer getId() {
         return id;

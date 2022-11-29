@@ -1,6 +1,9 @@
 package sptech.correcao01.controle;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import sptech.correcao01.dominio.Vaga;
+import sptech.correcao01.repositorio.VagaRepository;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -9,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArqTxtVaga {
+
+    @Autowired
+    private static VagaRepository repository;
     
             public static void gravaRegistro(String registro, String nomeArq) {
                 BufferedWriter saida = null;
@@ -48,7 +54,7 @@ public class ArqTxtVaga {
                 String corpo;
                 for (Vaga vaga : lista) {
                     corpo = "02";
-                    corpo += String.format("%06d", vaga.getIdVaga());
+                    corpo += String.format("%06d", vaga.getId());
                     corpo += String.format("%-25.25s", vaga.getTitulo());
                     corpo += String.format("%6.2f", vaga.getValor());
                     corpo += String.format("%4d", vaga.getTempEstimado());
@@ -128,7 +134,7 @@ public class ArqTxtVaga {
                             Vaga vaga = new Vaga(idVaga, descricao, valor, tempEstimado);
     
                             // No Projeto de PI, pode fazer
-                            // repository.save(a)
+                            repository.save(vaga);
     
                             // No nosso caso, como não estamos conectados ao banco
                             // vamos adicionar o objeto a na listaLida
@@ -173,8 +179,8 @@ public class ArqTxtVaga {
                     System.out.println(vaga);
                 }
     
-            //gravaArquivoTxt(lista, "vagas.txt");
-            leArquivoTxt("vagas.txt");
+                gravaArquivoTxt(lista, "vagas.txt");
+                //leArquivoTxt("vagas.txt");
         }
 
 }
