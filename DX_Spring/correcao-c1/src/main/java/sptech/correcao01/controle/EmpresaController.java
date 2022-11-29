@@ -1,25 +1,33 @@
 package sptech.correcao01.controle;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Empresa;
-import sptech.correcao01.dominio.Usuario;
+import sptech.correcao01.dominio.FileInfo;
+import sptech.correcao01.dominio.ImportacaoService;
 import sptech.correcao01.repositorio.EmpresaRepository;
-
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 @RequestMapping("/empresas")
 public class EmpresaController {
 
+    @Autowired
+    private ImportacaoService service;
 
     @Autowired
     private EmpresaRepository repository;
     private int contador;
+
+    private final ClasseTeste csv = new ClasseTeste();
     @PostMapping
     public ResponseEntity<Empresa> post(
             @RequestBody Empresa novaEmpresa) {
@@ -119,6 +127,43 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return listaLogado.isEmpty()? ResponseEntity.status(404).build() :ResponseEntity.status(200).body(listaLogado);
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file) {
+        String message = "";
+        try {
+            service.save(file);
+
+            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.OK).body((message));
+        } catch (Exception e) {
+            message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body((message));
+        }
+    }
+
+    @GetMapping("/files")
+    public ResponseEntity<List<FileInfo>> getListFiles() {
+        List<FileInfo> fileInfos = service.loadAll().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(EmpresaController.class, "getFile", path.getFileName().toString()).build().toString();
+
+            System.out.println(url);
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+    }
+
+    @GetMapping("/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        Resource file = service.load(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
     public int getContador() {
         return contador;
     }
