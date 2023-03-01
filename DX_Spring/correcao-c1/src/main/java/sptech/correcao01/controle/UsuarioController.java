@@ -116,7 +116,7 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<Usuario>> get() {
         List<Usuario> lista = repository.findAll();
-        ArqCsvUsuario.leExibeArquivoCsv("usuarios");
+//        ArqCsvUsuario.leExibeArquivoCsv("usuarios");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);

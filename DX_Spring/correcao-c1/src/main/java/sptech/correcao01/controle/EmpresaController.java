@@ -43,7 +43,7 @@ public class EmpresaController {
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela
-        ArqCsvEmpresa.leExibeArquivoCsv("empresas");
+//        ArqCsvEmpresa.leExibeArquivoCsv("empresas");
         return lista.isEmpty()
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
@@ -156,6 +156,8 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
+    @GetMapping("/LoginDuplicado")
+    public ResponseEntity<List<String>>
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {

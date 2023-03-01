@@ -67,12 +67,10 @@ public class Usuario implements Serializable {
     private boolean usuarioValidado;
 
     @NotBlank
-    @Pattern( // valida usando uma Regex (expressão regular)
+    /*@Pattern( // valida usando uma Regex (expressão regular)
         regexp = "\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}$",
         message = "Indique um telefone válido"
-    )
-
-
+    )*/
     private String telefone;
 
     public Usuario() {
