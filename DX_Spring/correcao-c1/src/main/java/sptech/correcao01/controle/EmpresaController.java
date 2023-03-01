@@ -108,7 +108,7 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return ResponseEntity.status(404).build();
     }
-    @GetMapping("/empresa-logado")
+
     public ResponseEntity getEmpresaLogado(@RequestParam(required = false) String empresa){
         List<Empresa> lista = repository.findAll();
         List<Empresa> listaLogado = new ArrayList<>();
