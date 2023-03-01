@@ -11,6 +11,7 @@ import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Empresa;
 import sptech.correcao01.dominio.FileInfo;
 import sptech.correcao01.dominio.ImportacaoService;
+import sptech.correcao01.dominio.Usuario;
 import sptech.correcao01.repositorio.EmpresaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,7 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         }
         return ResponseEntity.status(404).build();
     }
-
+    @GetMapping("/empresa-logado")
     public ResponseEntity getEmpresaLogado(@RequestParam(required = false) String empresa){
         List<Empresa> lista = repository.findAll();
         List<Empresa> listaLogado = new ArrayList<>();
@@ -156,8 +157,7 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
-    @GetMapping("/LoginDuplicado")
-    public ResponseEntity<List<String>>
+
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {

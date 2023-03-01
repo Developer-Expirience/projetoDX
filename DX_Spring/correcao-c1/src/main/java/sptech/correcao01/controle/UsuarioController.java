@@ -193,6 +193,7 @@ public class UsuarioController {
         }
         return ResponseEntity.status(404).build();
     }
+
     public int getContador() {
         return contador;
     }
