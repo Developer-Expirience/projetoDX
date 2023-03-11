@@ -19,15 +19,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.9</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<!-- esta dependência habilita as anotações de validação -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
