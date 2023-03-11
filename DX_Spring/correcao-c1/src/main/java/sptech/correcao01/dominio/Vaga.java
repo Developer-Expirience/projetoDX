@@ -14,7 +14,6 @@ public class Vaga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotNull
     private Double valor;
     @NotNull
