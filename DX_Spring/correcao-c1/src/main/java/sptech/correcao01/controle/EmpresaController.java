@@ -11,6 +11,7 @@ import sptech.correcao01.ListaObj;
 import sptech.correcao01.dominio.Empresa;
 import sptech.correcao01.dominio.FileInfo;
 import sptech.correcao01.dominio.ImportacaoService;
+import sptech.correcao01.dominio.Usuario;
 import sptech.correcao01.repositorio.EmpresaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/empresas")
 public class EmpresaController {
 
+
     @Autowired
     private ImportacaoService service;
 
@@ -28,6 +30,7 @@ public class EmpresaController {
     private int contador;
 
     private final ClasseTeste csv = new ClasseTeste();
+
     @PostMapping
     public ResponseEntity<Empresa> post(
             @RequestBody Empresa novaEmpresa) {
@@ -40,6 +43,11 @@ public class EmpresaController {
         return ResponseEntity.status(201).body(novaEmpresa);
     }
 
+    @GetMapping("/sessao/{usuario}")
+    public ResponseEntity<Empresa> getEmpresaSession(@PathVariable String usuario){
+        Empresa empresaBanco = repository.findByUsuario(usuario);
+        return ResponseEntity.status(200).body(empresaBanco);
+    }
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela

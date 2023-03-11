@@ -11,6 +11,7 @@ import sptech.correcao01.repositorio.VagaRepository;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/vagas")
 public class VagaController {
 
