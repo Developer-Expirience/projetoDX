@@ -25,16 +25,19 @@ public class Vaga {
     @NotNull
     private Integer tempEstimado;
 
+    private String linkDaImagem;
+
 
     public Vaga() {
     }
 
 
-    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
+    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado, String linkDaImagem ) {
         this.id = idVaga;
         this.titulo = descricao;
         this.valor = valor;
         this.tempEstimado = tempEstimado;
+        this.linkDaImagem = linkDaImagem;
     }
 
 
@@ -89,13 +92,25 @@ public class Vaga {
     }
 
 
+    public String getLinkDaImagem() {
+        return linkDaImagem;
+    }
+
+    public void setLinkDaImagem(String linkDaImagem) {
+        this.linkDaImagem = linkDaImagem;
+    }
+
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + id +
-                ", descricao='" + titulo + '\'' +
+                "id=" + id +
                 ", valor=" + valor +
+                ", senioridade='" + senioridade + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", tecnologia='" + tecnologia + '\'' +
                 ", tempEstimado=" + tempEstimado +
+                ", linkDaImagem='" + linkDaImagem + '\'' +
                 '}';
     }
 }
+

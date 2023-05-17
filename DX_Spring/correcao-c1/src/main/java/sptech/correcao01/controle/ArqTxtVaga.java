@@ -72,7 +72,7 @@ public class ArqTxtVaga {
             public static void leArquivoTxt(String nomeArq) {
                 BufferedReader entrada = null;
                 Double valor;
-                String tipoRegistro, registro, descricao;
+                String tipoRegistro, registro, descricao, linkDaImagem;
                 Integer idVaga, tempEstimado;
                 int contaRegDadoLido = 0;
                 int qtdRegDadoGravado;
@@ -128,10 +128,11 @@ public class ArqTxtVaga {
                             descricao = registro.substring(8, 33).trim();
                             valor = Double.valueOf(registro.substring(33, 39).replace(',','.'));
                             tempEstimado = Integer.valueOf(registro.substring(39, 43).trim());
+                            linkDaImagem = registro.substring(43, 70).trim();
                             contaRegDadoLido++;
     
                             // Instancia um objeto vaga com as informações lidas
-                            Vaga vaga = new Vaga(idVaga, descricao, valor, tempEstimado);
+                            Vaga vaga = new Vaga(idVaga, descricao, valor, tempEstimado,linkDaImagem );
     
                             // No Projeto de PI, pode fazer
                             repository.save(vaga);
@@ -169,9 +170,9 @@ public class ArqTxtVaga {
             public static void main(String[] args) {
                 List<Vaga> lista = new ArrayList();
     
-                lista.add(new Vaga(200010, "Front-End React", 145.10, 8));
-                lista.add(new Vaga(100010, "Back-End Java", 245.70, 10));
-                lista.add(new Vaga(200230, "Banco de dados Sql", 210.50, 7));
+                lista.add(new Vaga(200010, "Front-End React", 145.10, 8, "teste"));
+                lista.add(new Vaga(100010, "Back-End Java", 245.70, 10, "teste"));
+                lista.add(new Vaga(200230, "Banco de dados Sql", 210.50, 7, "teste"));
 
     
                 System.out.println("Lista original:");

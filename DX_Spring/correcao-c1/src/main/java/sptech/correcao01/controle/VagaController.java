@@ -54,7 +54,6 @@ public class VagaController {
                 ? ResponseEntity.status(204).build()
                 : ResponseEntity.status(200).body(lista);
     }
-
     @GetMapping("/{idVaga}")
     public ResponseEntity<Vaga> get(
             @PathVariable int idVaga) {
