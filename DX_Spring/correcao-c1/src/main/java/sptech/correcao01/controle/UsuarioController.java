@@ -74,10 +74,10 @@ public class UsuarioController {
             if (u.getUsuarioAutenticado(usuario, senha)){
                 u.setUsuarioValidado(true);
                 repository.save(u);
-                return ResponseEntity.status(200).body(true);
+                return ResponseEntity.status(200).body(u);
             }
         }
-        return ResponseEntity.status(404).body(false);
+        return ResponseEntity.status(404).build();
     }
 
     @PostMapping("/logoff/{usuario}")

@@ -9,7 +9,7 @@ import sptech.correcao01.dominio.Vaga;
 import sptech.correcao01.repositorio.VagaRepository;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/vagas")
 public class VagaController {
