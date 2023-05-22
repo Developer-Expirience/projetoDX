@@ -25,20 +25,24 @@ public class Vaga {
     @NotNull
     private Integer tempEstimado;
 
+    @NotNull
+    private String urlImagem;
+
 
     public Vaga() {
     }
 
 
-    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
+    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimad, String urlImagem){
         this.id = idVaga;
         this.titulo = descricao;
         this.valor = valor;
         this.tempEstimado = tempEstimado;
+        this.urlImagem = urlImagem;
     }
 
 
-    
+
     public Integer getId() {
         return id;
     }
@@ -88,14 +92,24 @@ public class Vaga {
         this.tempEstimado = tempEstimado;
     }
 
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
+    }
 
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + id +
-                ", descricao='" + titulo + '\'' +
+                "id=" + id +
                 ", valor=" + valor +
+                ", senioridade='" + senioridade + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", tecnologia='" + tecnologia + '\'' +
                 ", tempEstimado=" + tempEstimado +
+                ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
 }
