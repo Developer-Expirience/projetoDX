@@ -98,6 +98,7 @@ public class Vaga {
         this.urlImagem = urlImagem;
     }
 
+
     @Override
     public String toString() {
         return "Vaga{" +
@@ -111,3 +112,4 @@ public class Vaga {
                 '}';
     }
 }
+

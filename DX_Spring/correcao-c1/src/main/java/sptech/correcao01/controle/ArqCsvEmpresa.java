@@ -30,7 +30,7 @@ public class ArqCsvEmpresa {
             saida = new Formatter(arq);
 
         } catch (IOException erro) {
-            System.out.println("Erro ao abrir o arquivo");
+            System.out.println("Erro ao abriraulsr o arquivo");
             System.exit(1);
         }
 
