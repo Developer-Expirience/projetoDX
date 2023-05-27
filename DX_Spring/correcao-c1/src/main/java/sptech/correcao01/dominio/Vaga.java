@@ -25,7 +25,6 @@ public class Vaga {
     @NotNull
     private Integer tempEstimado;
 
-    @NotNull
     private String urlImagem;
 
 
@@ -40,7 +39,6 @@ public class Vaga {
         this.tempEstimado = tempEstimado;
         this.urlImagem = urlImagem;
     }
-
 
 
     public Integer getId() {
