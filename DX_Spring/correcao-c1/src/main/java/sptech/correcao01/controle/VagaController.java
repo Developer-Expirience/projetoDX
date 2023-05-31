@@ -88,21 +88,21 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
         return contador;
     }
 //  vagas/procurar-salario?minSalario=2000&maxSalario=5000
-    @GetMapping("/procurar-salario")
-    public ResponseEntity <List<Vaga>> procurarSalario(@RequestParam(defaultValue = "0") Double minSalario, @RequestParam(defaultValue = "1000000000000") Double maxSalario){
-        List<Vaga> result = repository.findBySalarioBetween(minSalario,maxSalario);
-        return ResponseEntity.status(200).body(result);
-    }
+//    @GetMapping("/procurar-salario")
+//    public ResponseEntity <List<Vaga>> procurarSalario(@RequestParam(defaultValue = "0") Double minSalario, @RequestParam(defaultValue = "1000000000000") Double maxSalario){
+//        List<Vaga> result = repository.findBySalarioBetween(minSalario,maxSalario);
+//        return ResponseEntity.status(200).body(result);
+//    }
     @GetMapping("/procurar-senioridade/{senioridade}")
     public ResponseEntity<List<Vaga>> getPorSenioridade(@PathVariable String senioridade){
         List<Vaga> vagasSenioridade = repository.findBySenioridade(senioridade);
         return vagasSenioridade.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasSenioridade);
     }
-    @GetMapping("/procurar-tecnologia/{tecnologia}")
-    public ResponseEntity<List<Vaga>> getPorTecnologia(@PathVariable String tecnologia){
-        List<Vaga> vagasTecnologia = repository.findByTecnologiaContaining(tecnologia);
-        return vagasTecnologia.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasTecnologia);
-    }
+//    @GetMapping("/procurar-tecnologia/{tecnologia}")
+//    public ResponseEntity<List<Vaga>> getPorTecnologia(@PathVariable String tecnologia){
+//        List<Vaga> vagasTecnologia = repository.findByTecnologiaContaining(tecnologia);
+//        return vagasTecnologia.isEmpty()?ResponseEntity.status(204).build():ResponseEntity.status(200).body(vagasTecnologia);
+//    }
     @GetMapping("/procurar-titulo/{titulo}")
     public ResponseEntity<List<Vaga>> getPorTitulo(@PathVariable String titulo){
         List<Vaga> vagasTitulo = repository.findByTituloContaining(titulo);

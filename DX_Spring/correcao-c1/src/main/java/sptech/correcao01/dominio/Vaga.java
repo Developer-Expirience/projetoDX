@@ -15,28 +15,22 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
-    private Double valor;
-    @NotNull
     private String senioridade;
     @NotNull
     private String titulo;
-    @NotNull
-    private String tecnologia;
-    @NotNull
-    private Integer tempEstimado;
 
+     @NotNull
+     private String descricao;
     private String urlImagem;
-
-
     public Vaga() {
     }
 
 
-    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimad, String urlImagem){
+    public Vaga(Integer idVaga, String descricao, String senioridade, String titulo, String urlImagem){
         this.id = idVaga;
-        this.titulo = descricao;
-        this.valor = valor;
-        this.tempEstimado = tempEstimado;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.senioridade = senioridade;
         this.urlImagem = urlImagem;
     }
 
@@ -65,30 +59,7 @@ public class Vaga {
         this.senioridade = senioridade;
     }
 
-    public String getTecnologia() {
-        return tecnologia;
-    }
 
-    public void setTecnologia(String tecnologia) {
-        this.tecnologia = tecnologia;
-    }
-
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Integer getTempEstimado() {
-        return tempEstimado;
-    }
-
-    public void setTempEstimado(Integer tempEstimado) {
-        this.tempEstimado = tempEstimado;
-    }
 
     public String getUrlImagem() {
         return urlImagem;
@@ -98,16 +69,17 @@ public class Vaga {
         this.urlImagem = urlImagem;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
 
     @Override
     public String toString() {
         return "Vaga{" +
                 "id=" + id +
-                ", valor=" + valor +
                 ", senioridade='" + senioridade + '\'' +
                 ", titulo='" + titulo + '\'' +
-                ", tecnologia='" + tecnologia + '\'' +
-                ", tempEstimado=" + tempEstimado +
+                ", descricao='" + descricao + '\'' +
                 ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
