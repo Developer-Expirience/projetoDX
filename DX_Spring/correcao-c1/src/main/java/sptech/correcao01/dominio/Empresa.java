@@ -42,6 +42,9 @@ public class Empresa implements Serializable {
     @NotBlank // valida se não é nulo, texto vazio ou texto só com espaços em branco
     private String senha;
 
+    @NotBlank // valida se não é nulo, texto vazio ou texto só com espaços em branco
+    private String sobreNos;
+
     @NotBlank(message = "Onde já se viu nenhum email?!") // valida se não é nulo, texto vazio ou texto só com espaços em branco
     @Email
     private String email;
@@ -87,7 +90,7 @@ public class Empresa implements Serializable {
 
     public Empresa(Integer idEmpresa, String nome, String usuario, String email, String cnpj,
                    String telefone, Integer numFuncionario, String rua, Integer numero, String cep, String bairro,
-                   String cidade) {
+                   String cidade, String sobreNos) {
         this.idEmpresa = idEmpresa;
         this.nome = nome;
         this.usuario = usuario;
@@ -100,6 +103,7 @@ public class Empresa implements Serializable {
         this.cep = cep;
         this.bairro = bairro;
         this.cidade = cidade;
+        this.sobreNos = sobreNos;
     }
     public boolean isEmpresaValidado() {
         return empresaValidado;
@@ -115,6 +119,14 @@ public class Empresa implements Serializable {
         }
         return empresaValidado;
 
+    }
+
+    public String getSobreNos() {
+        return sobreNos;
+    }
+
+    public void setSobreNos(String sobreNos) {
+        this.sobreNos = sobreNos;
     }
 
     public Integer getIdEmpresa() {
