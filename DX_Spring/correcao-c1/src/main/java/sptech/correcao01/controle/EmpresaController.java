@@ -42,6 +42,12 @@ public class EmpresaController {
     }
 
 
+    @GetMapping("/sessao/{usuario}")
+    public ResponseEntity<Empresa> getUsuarioSession(@PathVariable String usuario){
+        Empresa empresaBanco = repository.findByUsuario(usuario);
+        return ResponseEntity.status(200).body(empresaBanco);
+    }
+
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela
