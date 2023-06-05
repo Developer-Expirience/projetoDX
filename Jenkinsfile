@@ -10,6 +10,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                        sh "docker stop app || true"
                         sh "docker container rm app || true"
                         sh "docker rm -f app || true"
                         sh "docker pull ${DOCKER_IMAGE}"
