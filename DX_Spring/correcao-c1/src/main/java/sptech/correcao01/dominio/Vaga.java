@@ -15,30 +15,26 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
-    private Double valor;
-    @NotNull
     private String senioridade;
     @NotNull
     private String titulo;
-    @NotNull
-    private String tecnologia;
-    @NotNull
-    private Integer tempEstimado;
 
-
+     @NotNull
+     private String descricao;
+    private String urlImagem;
     public Vaga() {
     }
 
 
-    public Vaga(Integer idVaga, String descricao, Double valor, Integer tempEstimado) {
+    public Vaga(Integer idVaga, String descricao, String senioridade, String titulo, String urlImagem){
         this.id = idVaga;
-        this.titulo = descricao;
-        this.valor = valor;
-        this.tempEstimado = tempEstimado;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.senioridade = senioridade;
+        this.urlImagem = urlImagem;
     }
 
 
-    
     public Integer getId() {
         return id;
     }
@@ -63,39 +59,29 @@ public class Vaga {
         this.senioridade = senioridade;
     }
 
-    public String getTecnologia() {
-        return tecnologia;
+
+
+    public String getUrlImagem() {
+        return urlImagem;
     }
 
-    public void setTecnologia(String tecnologia) {
-        this.tecnologia = tecnologia;
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
     }
 
-
-    public Double getValor() {
-        return valor;
+    public String getDescricao() {
+        return descricao;
     }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Integer getTempEstimado() {
-        return tempEstimado;
-    }
-
-    public void setTempEstimado(Integer tempEstimado) {
-        this.tempEstimado = tempEstimado;
-    }
-
 
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + id +
-                ", descricao='" + titulo + '\'' +
-                ", valor=" + valor +
-                ", tempEstimado=" + tempEstimado +
+                "id=" + id +
+                ", senioridade='" + senioridade + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
 }
+
