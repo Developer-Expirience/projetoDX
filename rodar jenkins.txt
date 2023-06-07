@@ -1,0 +1,13 @@
+entrar como sudo su
+
+git branch = verificar vagas-testes e entrar
+
+sudo aa-remove-unknown
+sudo chmod 666 /var/run/docker.sock
+
+
+
+http://54.87.83.117:8080/login?from=%2Fjob%2FDX-PipeLine%2F69%2F
+
+DX-admin
+Sptech@123
