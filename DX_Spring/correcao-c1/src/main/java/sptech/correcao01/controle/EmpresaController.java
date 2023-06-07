@@ -41,6 +41,13 @@ public class EmpresaController {
         return ResponseEntity.status(201).body(novaEmpresa);
     }
 
+
+    @GetMapping("/sessao/{usuario}")
+    public ResponseEntity<Empresa> getUsuarioSession(@PathVariable String usuario){
+        Empresa empresaBanco = repository.findByUsuario(usuario);
+        return ResponseEntity.status(200).body(empresaBanco);
+    }
+
     @GetMapping
     public ResponseEntity<List<Empresa>> get() {
         List<Empresa> lista = repository.findAll(); // faz um "select * from" da tabela
@@ -91,10 +98,10 @@ O existsById() faz um "select count(*)..." para saber se o id existe na tabela
             if (e.getEmpresaAutenticado(empresa, senha)){
                 e.setEmpresaValidado(true);
                 repository.save(e);
-                return ResponseEntity.status(200).body(true);
+                return ResponseEntity.status(200).body(e);
             }
         }
-        return ResponseEntity.status(404).body(false);
+        return ResponseEntity.status(404).build();
     }
 
     @PostMapping("/logoff/{empresa}")

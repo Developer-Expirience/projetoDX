@@ -10,10 +10,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+<<<<<<< HEAD
                         sh "docker stop app || true"
                         sh "docker rm -f app || true"
                         sh "docker pull ${DOCKER_IMAGE}"
                         sh "docker run -d --name app -p 8091:8080 ${DOCKER_IMAGE}"
+=======
+                        sh "docker pull ${DOCKER_IMAGE}"
+                        sh "docker run -d -p 8090:8080 ${DOCKER_IMAGE}"
+>>>>>>> vagas-testes
                 }
             }
         }
