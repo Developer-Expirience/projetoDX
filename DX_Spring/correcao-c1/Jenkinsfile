@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "tchuko0/dx-back'
+        DOCKER_IMAGE = 'tchuko0/dx-back'
 
     }
 
